@@ -4,6 +4,7 @@ go 1.23.1
 
 require (
 	github.com/charmbracelet/huh v0.6.0
+	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/spf13/viper v1.19.0
 )
 
@@ -13,7 +14,6 @@ require (
 	github.com/catppuccin/go v0.2.0 // indirect
 	github.com/charmbracelet/bubbles v0.20.0 // indirect
 	github.com/charmbracelet/bubbletea v1.2.5-0.20241205214244-9306010a31ee // indirect
-	github.com/charmbracelet/lipgloss v1.0.0 // indirect
 	github.com/charmbracelet/x/ansi v0.4.5 // indirect
 	github.com/charmbracelet/x/exp/strings v0.0.0-20240722160745-212f7b056ed0 // indirect
 	github.com/charmbracelet/x/term v0.2.1 // indirect
