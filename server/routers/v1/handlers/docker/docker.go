@@ -9,6 +9,7 @@ import (
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/docker/go-connections/nat"
 	"github.com/matfire/pockets/server/routers/v1/types"
 )
 
@@ -54,7 +55,22 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	}
 	res, err := cli.ContainerCreate(context.Background(), &container.Config{
 		Image: "pockets:0.23",
-	}, nil, nil, nil, body.Name)
+		ExposedPorts: nat.PortSet{
+			"8080": struct{}{},
+		},
+	}, &container.HostConfig{
+		PortBindings: nat.PortMap{
+			// this should be the same as the exposed port
+			"8080": []nat.PortBinding{
+				{
+					// wildcart locahost because docker shenanigans
+					HostIP: "0.0.0.0",
+					//TODO this should be randomly generated
+					HostPort: "8081",
+				},
+			},
+		},
+	}, nil, nil, body.Name)
 
 	cli.ContainerStart(context.Background(), res.ID, container.StartOptions{})
 	data, err := json.Marshal(res)
