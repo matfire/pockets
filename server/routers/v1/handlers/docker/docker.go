@@ -29,8 +29,12 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("got %d containers", len(containers))
-	data, err := json.Marshal(types.StatusResponse{Message: "ok"})
+	res := types.ListResponse{Containers: []types.Container{}}
+	for _, c := range containers {
+		res.Containers = append(res.Containers, types.Container{Name: c.Names[0]})
+	}
+	fmt.Printf("%v", res)
+	data, err := json.Marshal(res)
 	if err != nil {
 		panic("could not marshal empty json")
 	}
