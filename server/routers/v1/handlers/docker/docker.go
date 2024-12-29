@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	getport "github.com/jsumners/go-getport"
 	"io"
 	"net/http"
 
@@ -55,6 +56,11 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	port, err := getport.GetTcpPortForAddress("0.0.0.0")
+	if err != nil {
+		fmt.Printf("%v", err)
+		panic("could not get port")
+	}
 	res, err := cli.ContainerCreate(context.Background(), &container.Config{
 		Image: "pockets:0.23",
 		ExposedPorts: nat.PortSet{
@@ -71,7 +77,7 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 					// wildcart locahost because docker shenanigans
 					HostIP: "0.0.0.0",
 					//TODO this should be randomly generated
-					HostPort: "8081",
+					HostPort: fmt.Sprintf("%d", port.Port),
 				},
 			},
 		},
