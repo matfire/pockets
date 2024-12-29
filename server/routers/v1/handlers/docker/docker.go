@@ -58,5 +58,6 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 
 	cli.ContainerStart(context.Background(), res.ID, container.StartOptions{})
 	data, err := json.Marshal(res)
+	w.WriteHeader(201)
 	w.Write(data)
 }
