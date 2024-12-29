@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/charmbracelet/huh/spinner"
 	"github.com/matfire/pockets/cli/config"
 )
 
@@ -14,15 +15,20 @@ type CreateRequestBody struct {
 }
 
 func Create(config *config.App, name string) {
-	body := CreateRequestBody{Name: name}
-	b, err := json.Marshal(body)
-	if err != nil {
-		fmt.Printf("could not marshal body in create request \n")
+	createContainer := func() {
+		body := CreateRequestBody{Name: name}
+		b, err := json.Marshal(body)
+		if err != nil {
+			fmt.Printf("could not marshal body in create request \n")
+		}
+		_, err = http.Post(fmt.Sprintf("%s/v1/create", config.Endpoint), "application/json", bytes.NewBuffer(b))
+		if err != nil {
+			fmt.Printf("create request failed with error %v", err)
+			return
+		}
 	}
-	res, err := http.Post(fmt.Sprintf("%s/v1/create", config.Endpoint), "application/json", bytes.NewBuffer(b))
-	if err != nil {
-		fmt.Printf("create request failed with error %v", err)
-		return
+	if err := spinner.New().Title("Creating Container...").Action(createContainer).Run(); err != nil {
+		fmt.Println(err)
 	}
-	fmt.Printf("create response: %v", res)
+
 }
