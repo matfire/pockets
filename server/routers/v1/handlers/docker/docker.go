@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/docker/go-connections/nat"
 	"github.com/matfire/pockets/server/routers/v1/types"
@@ -21,7 +22,8 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 
 	// TODO filter by network and/or by labels
 	containers, err := cli.ContainerList(context.Background(), container.ListOptions{
-		All: true,
+		All:     true,
+		Filters: filters.NewArgs(filters.Arg("label", "pockets")),
 	})
 	if err != nil {
 		panic(err)
