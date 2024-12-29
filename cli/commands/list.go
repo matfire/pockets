@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/matfire/pockets/cli/config"
 	"github.com/spf13/cobra"
 )
 
@@ -13,14 +14,14 @@ type ListResponse struct {
 	Message string `json:"Message"`
 }
 
-func CreateListCommand() *cobra.Command {
+func CreateListCommand(config *config.App) *cobra.Command {
 	var listCommand = &cobra.Command{
 		Use:     "list",
 		Example: "pocketsctl list",
 		Args:    cobra.ExactArgs(0),
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Print("listing containers")
-			res, err := http.Get("http://127.0.0.1:3000/v1/status")
+			res, err := http.Get(fmt.Sprintf("%s/v1/status", config.Endpoint))
 			if err != nil {
 				panic("could not get data")
 			}
