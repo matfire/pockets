@@ -58,6 +58,9 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 		ExposedPorts: nat.PortSet{
 			"8080": struct{}{},
 		},
+		Labels: map[string]string{
+			"pockets": "",
+		},
 	}, &container.HostConfig{
 		PortBindings: nat.PortMap{
 			// this should be the same as the exposed port
