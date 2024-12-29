@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/charmbracelet/huh/spinner"
+	"github.com/charmbracelet/lipgloss/table"
 	"github.com/matfire/pockets/cli/config"
 )
 
@@ -35,5 +36,10 @@ func List(config *config.App) {
 	if err := spinner.New().Title("Fetching containers...").Action(getContainers).Run(); err != nil {
 		fmt.Println(err)
 	}
-	fmt.Printf("%v", data)
+	t := table.New().Headers("Name")
+
+	for _, container := range data.Containers {
+		t.Row(container.Name)
+	}
+	fmt.Println(t)
 }
