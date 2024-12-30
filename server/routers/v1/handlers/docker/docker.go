@@ -114,7 +114,26 @@ func StartContainer(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func DeleteContainer(w http.ResponseWriter, r *http.Request) {}
+// TODO should only delete a container with the "pockets" label and/or in the pockets network
+func DeleteContainer(w http.ResponseWriter, r *http.Request) {
+	containerId := chi.URLParam(r, "containerId")
+	if containerId == "" {
+		panic("could not find containerId in route Url")
+	}
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+	err = cli.ContainerRemove(context.Background(), containerId, container.RemoveOptions{
+		Force: true,
+	})
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Write([]byte("container stopped"))
+}
 
 func StopContainer(w http.ResponseWriter, r *http.Request) {
 	containerId := chi.URLParam(r, "containerId")

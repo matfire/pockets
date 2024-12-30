@@ -18,6 +18,6 @@ func main() {
 	var config config.App
 	config.Endpoint = viper.GetString("ENDPOINT")
 
-	commands.RootCmd.AddCommand(commands.CreateCreateCommand(&config), commands.CreateListCommand(&config), commands.CreateStopCommand(&config), commands.CreateStartCommand(&config))
+	commands.RootCmd.AddCommand(commands.CreateCreateCommand(&config), commands.CreateListCommand(&config), commands.CreateStopCommand(&config), commands.CreateStartCommand(&config), commands.CreateDeleteCommand(&config))
 	commands.RootCmd.Execute()
 }
