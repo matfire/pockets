@@ -16,13 +16,19 @@ func CreateDeleteCommand(config *config.App) *cobra.Command {
 		Args:    cobra.MaximumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			var name string
-			var confirmed bool
+			confirmed, err := cmd.Flags().GetBool("force")
+			if err != nil {
+				fmt.Printf("%v", err)
+				panic("error while getting flag")
+			}
 			if len(args) > 0 {
 				name = args[0]
 			} else {
 				huh.NewInput().Title("what's the id of the container?").Value(&name).Run()
 			}
-			huh.NewConfirm().Title("Are you sure you want to delete this container?").Value(&confirmed).Run()
+			if !confirmed {
+				huh.NewConfirm().Title("Are you sure you want to delete this container?").Value(&confirmed).Run()
+			}
 			if confirmed {
 				docker.Delete(config, name)
 			} else {
@@ -30,5 +36,6 @@ func CreateDeleteCommand(config *config.App) *cobra.Command {
 			}
 		},
 	}
+	createCommand.Flags().Bool("force", false, "")
 	return createCommand
 }
