@@ -11,12 +11,14 @@ import (
 )
 
 type CreateRequestBody struct {
-	Name string
+	Name    string `json:"name"`
+	Version string `json:"version"`
 }
 
-func Create(config *config.App, name string) {
+func Create(config *config.App, name string, version string) {
+
 	createContainer := func() {
-		body := CreateRequestBody{Name: name}
+		body := CreateRequestBody{Name: name, Version: version}
 		b, err := json.Marshal(body)
 		if err != nil {
 			fmt.Printf("could not marshal body in create request \n")

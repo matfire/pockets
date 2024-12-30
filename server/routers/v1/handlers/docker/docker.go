@@ -6,15 +6,21 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"slices"
 
+	"github.com/charmbracelet/log"
 	"github.com/go-chi/chi/v5"
-	getport "github.com/jsumners/go-getport"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 	"github.com/docker/go-connections/nat"
+	getport "github.com/jsumners/go-getport"
+
 	"github.com/matfire/pockets/server/routers/v1/types"
+
+	dockerutils "github.com/matfire/pockets/server/docker"
 )
 
 func GetStatus(w http.ResponseWriter, r *http.Request) {
@@ -62,13 +68,33 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	//FIXME split this into separate route to allow for async image creation prorcess
+	images, err := cli.ImageList(context.Background(), image.ListOptions{
+		All: true,
+	})
+	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
+		log.Info(el.RepoTags)
+		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
+			return t == fmt.Sprintf("pockets:%s", body.Version)
+		})
+		log.Info(repoIdx)
+		return repoIdx != -1
+	})
+	if imgIdx == -1 {
+		log.Info("Could not image for specified tag, generating...")
+		log.Info(fmt.Sprintf("version requested is %s", body.Version))
+		err = dockerutils.CreatePBImage(body.Version)
+		if err != nil {
+			panic(err)
+		}
+	}
 	port, err := getport.GetTcpPortForAddress("0.0.0.0")
 	if err != nil {
 		fmt.Printf("%v", err)
 		panic("could not get port")
 	}
 	res, err := cli.ContainerCreate(context.Background(), &container.Config{
-		Image: "pockets:0.23",
+		Image: fmt.Sprintf("pockets:%s", body.Version),
 		ExposedPorts: nat.PortSet{
 			"8080": struct{}{},
 		},
