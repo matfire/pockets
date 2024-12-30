@@ -4,9 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	getport "github.com/jsumners/go-getport"
 	"io"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	getport "github.com/jsumners/go-getport"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
@@ -91,4 +93,43 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	data, err := json.Marshal(res)
 	w.WriteHeader(201)
 	w.Write(data)
+}
+
+func StartContainer(w http.ResponseWriter, r *http.Request) {
+	containerId := chi.URLParam(r, "containerId")
+	if containerId == "" {
+		panic("could not find containerId in route Url")
+	}
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+	err = cli.ContainerStart(context.Background(), containerId, container.StartOptions{})
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Write([]byte("container started"))
+
+}
+
+func DeleteContainer(w http.ResponseWriter, r *http.Request) {}
+
+func StopContainer(w http.ResponseWriter, r *http.Request) {
+	containerId := chi.URLParam(r, "containerId")
+	if containerId == "" {
+		panic("could not find containerId in route Url")
+	}
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+	err = cli.ContainerStop(context.Background(), containerId, container.StopOptions{})
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Write([]byte("container stopped"))
 }
