@@ -11,3 +11,7 @@ type Container struct {
 type ListResponse struct {
 	Containers []Container `json:"containers"`
 }
+
+type ImageCheckResponse struct {
+	Exists bool `json:"exists"`
+}

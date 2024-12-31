@@ -23,6 +23,73 @@ import (
 	dockerutils "github.com/matfire/pockets/server/docker"
 )
 
+func CheckImage(w http.ResponseWriter, r *http.Request) {
+	version := chi.URLParam(r, "version")
+	log.Info(fmt.Sprintf("checking for image version %s", version))
+	var response types.ImageCheckResponse
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic("could not connect to docker daemon")
+	}
+	images, err := cli.ImageList(context.Background(), image.ListOptions{
+		All: true,
+	})
+	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
+		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
+			return t == fmt.Sprintf("pockets:%s", version)
+		})
+		return repoIdx != -1
+	})
+
+	if imgIdx == -1 {
+		response.Exists = false
+	} else {
+		response.Exists = true
+	}
+	res, err := json.Marshal(response)
+	w.Write(res)
+
+}
+
+func CreateImage(w http.ResponseWriter, r *http.Request) {
+	var body types.ImageCreateBody
+
+	b, err := io.ReadAll(r.Body)
+
+	if err != nil {
+		panic("could not read body")
+	}
+
+	defer r.Body.Close()
+
+	err = json.Unmarshal(b, &body)
+	if err != nil {
+		panic("could not parse body")
+	}
+
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	images, err := cli.ImageList(context.Background(), image.ListOptions{
+		All: true,
+	})
+	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
+		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
+			return t == fmt.Sprintf("pockets:%s", body.Version)
+		})
+		return repoIdx != -1
+	})
+	if imgIdx == -1 {
+		log.Info("Could not image for specified tag, generating...")
+		log.Info(fmt.Sprintf("version requested is %s", body.Version))
+		err = dockerutils.CreatePBImage(body.Version)
+		if err != nil {
+			panic(err)
+		}
+		w.Write([]byte("something"))
+	} else {
+		w.Write([]byte("something else"))
+	}
+}
+
 func GetStatus(w http.ResponseWriter, r *http.Request) {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
@@ -68,25 +135,20 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	//FIXME split this into separate route to allow for async image creation prorcess
 	images, err := cli.ImageList(context.Background(), image.ListOptions{
 		All: true,
 	})
 	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
-		log.Info(el.RepoTags)
 		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
 			return t == fmt.Sprintf("pockets:%s", body.Version)
 		})
-		log.Info(repoIdx)
 		return repoIdx != -1
 	})
+	log.Info(imgIdx)
 	if imgIdx == -1 {
-		log.Info("Could not image for specified tag, generating...")
-		log.Info(fmt.Sprintf("version requested is %s", body.Version))
-		err = dockerutils.CreatePBImage(body.Version)
-		if err != nil {
-			panic(err)
-		}
+		w.WriteHeader(401)
+		w.Write([]byte("image does not exist"))
+		return
 	}
 	port, err := getport.GetTcpPortForAddress("0.0.0.0")
 	if err != nil {
