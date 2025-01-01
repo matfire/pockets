@@ -49,6 +49,7 @@ func CreatePBImage(tag string) error {
 		Dockerfile: dockerFile,
 		Tags:       tags,
 		BuildArgs:  map[string]*string{"PB_VERSION": &versionArg},
+		Remove:     true,
 	})
 	return err
 }
