@@ -8,12 +8,13 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/charmbracelet/log"
 	"github.com/go-chi/chi/v5"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/image"
+	"github.com/docker/docker/api/types/mount"
+	"github.com/docker/docker/api/types/volume"
 	"github.com/docker/docker/client"
 	"github.com/docker/go-connections/nat"
 	getport "github.com/jsumners/go-getport"
@@ -25,7 +26,6 @@ import (
 
 func CheckImage(w http.ResponseWriter, r *http.Request) {
 	version := chi.URLParam(r, "version")
-	log.Info(fmt.Sprintf("checking for image version %s", version))
 	var response types.ImageCheckResponse
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
@@ -78,8 +78,6 @@ func CreateImage(w http.ResponseWriter, r *http.Request) {
 		return repoIdx != -1
 	})
 	if imgIdx == -1 {
-		log.Info("Could not image for specified tag, generating...")
-		log.Info(fmt.Sprintf("version requested is %s", body.Version))
 		err = dockerutils.CreatePBImage(body.Version)
 		if err != nil {
 			panic(err)
@@ -144,12 +142,12 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 		})
 		return repoIdx != -1
 	})
-	log.Info(imgIdx)
 	if imgIdx == -1 {
 		w.WriteHeader(401)
 		w.Write([]byte("image does not exist"))
 		return
 	}
+	volume, err := cli.VolumeCreate(context.Background(), volume.CreateOptions{})
 	port, err := getport.GetTcpPortForAddress("0.0.0.0")
 	if err != nil {
 		fmt.Printf("%v", err)
@@ -164,6 +162,13 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 			"pockets": "",
 		},
 	}, &container.HostConfig{
+		Mounts: []mount.Mount{
+			{
+				Type:   mount.TypeVolume,
+				Source: volume.Name,
+				Target: "/pb/pb_data",
+			},
+		},
 		PortBindings: nat.PortMap{
 			// this should be the same as the exposed port
 			"8080": []nat.PortBinding{
