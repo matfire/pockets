@@ -72,6 +72,19 @@ release:
 
     Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
 brews:
-  - name: server
+  - name: pockets
     homepage: https://pockets.matteogassend.com
-        
+    ids:
+      - pockets
+    repository:
+      owner: matfire
+      name: homebrew-matfire
+      token: "{{ .Env.GITHUB_TOKEN}}"
+  - name: pocketsctl
+    homepage: https://pockets.matteogassend.com
+    ids:
+      - pocketsctl
+    repository:
+      owner: matfire
+      name: homebrew-matfire
+      token: "{{ .Env.GITHUB_TOKEN}}"
