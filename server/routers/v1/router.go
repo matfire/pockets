@@ -3,9 +3,10 @@ package v1
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/matfire/pockets/server/routers/v1/handlers/docker"
+	"github.com/matfire/pockets/server/utils"
 )
 
-func GetRouter() *chi.Mux {
+func GetRouter(app *utils.App) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Get("/status", docker.GetStatus)
