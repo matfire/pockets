@@ -20,7 +20,7 @@ func main() {
 	viper.AddConfigPath(".")
 	viper.SetEnvPrefix("PKTS")
 	viper.SetDefault("PORT", 3000)
-	viper.SetDefault("ADMIN_USER", "admin")
+	viper.SetDefault("ADMIN_USER", "admin@example.com")
 	viper.SetDefault("ADMIN_PASSWORD", "test1234")
 	viper.AutomaticEnv()
 	err := viper.ReadInConfig()
