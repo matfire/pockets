@@ -7,7 +7,10 @@ import (
 	"io"
 	"net/http"
 	"slices"
+	"sync"
+	"time"
 
+	"github.com/charmbracelet/log"
 	"github.com/go-chi/chi/v5"
 
 	"github.com/docker/docker/api/types/container"
@@ -20,6 +23,7 @@ import (
 	getport "github.com/jsumners/go-getport"
 
 	"github.com/matfire/pockets/server/routers/v1/types"
+	"github.com/matfire/pockets/server/utils"
 
 	dockerutils "github.com/matfire/pockets/server/docker"
 )
@@ -114,7 +118,7 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-func CreateContainer(w http.ResponseWriter, r *http.Request) {
+func CreateContainer(w http.ResponseWriter, r *http.Request, app *utils.App) {
 	var body types.ContainerCreateBody
 	//TODO add validation so that container name is valid (no spaces, probably more rules...)
 
@@ -183,6 +187,44 @@ func CreateContainer(w http.ResponseWriter, r *http.Request) {
 	}, nil, nil, body.Name)
 
 	cli.ContainerStart(context.Background(), res.ID, container.StartOptions{})
+	var wg sync.WaitGroup
+	log.Info("Waiting for pocketbase to start properly")
+	time.Sleep(5 * time.Second)
+	adminCmd, err := cli.ContainerExecCreate(context.Background(), res.ID, container.ExecOptions{
+		Cmd:          []string{"/pb/pocketbase", "superuser", "upsert", app.AdminUser, app.AdminPassword},
+		AttachStdout: true,
+		AttachStderr: true,
+	})
+	//CHECK AND BLOCK FOR COMMAND STATUS
+	if err != nil {
+		panic(err)
+	}
+	err = cli.ContainerExecStart(context.Background(), adminCmd.ID, container.ExecStartOptions{
+		Detach: false,
+		Tty:    false,
+	})
+	if err != nil {
+		panic(err)
+	}
+	wg.Add(1)
+	log.Info("Waiting for command to run")
+	go func() {
+		ticker := time.NewTicker(5 * time.Second)
+		for range ticker.C {
+			log.Info("Checking for exec status")
+			status, err := cli.ContainerExecInspect(context.Background(), adminCmd.ID)
+			if err != nil {
+				log.Error(err)
+			}
+			if !status.Running {
+				ticker.Stop()
+				log.Infof("Got status code %d", status.ExitCode)
+				wg.Done()
+			}
+		}
+
+	}()
+	wg.Wait()
 	data, err := json.Marshal(res)
 	w.WriteHeader(201)
 	w.Write(data)
