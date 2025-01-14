@@ -26,3 +26,9 @@ func (s *PocketsServer) CreateContainer(ctx context.Context, req *connect.Reques
 	res := connect.NewResponse(data)
 	return res, err
 }
+
+func (s *PocketsServer) CheckImage(ctx context.Context, req *connect.Request[sharedv1.CheckImageRequest]) (*connect.Response[sharedv1.CheckImageResponse], error) {
+	data, err := docker.CheckImage(req.Msg)
+	res := connect.NewResponse(data)
+	return res, err
+}
