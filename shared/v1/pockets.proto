@@ -8,6 +8,7 @@ service PocketsService {
 	rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {}
 	rpc CreateContainer(CreateContainerRequest) returns (CreateContainerResponse) {}
 	rpc CheckImage(CheckImageRequest) returns (CheckImageResponse) {}
+	rpc CreateImage(CreateImageRequest) returns (CreateImageResponse) {}
 }
 
 message GetContainersRequest {}
@@ -37,4 +38,12 @@ message CheckImageRequest {
 
 message CheckImageResponse {
 	bool exists = 1;
+}
+
+message CreateImageRequest {
+	string version = 1;
+}
+
+message CreateImageResponse {
+
 }

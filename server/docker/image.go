@@ -44,6 +44,32 @@ func CheckImage(data *sharedv1.CheckImageRequest) (*sharedv1.CheckImageResponse,
 	return &response, nil
 }
 
+func CreateImage(data *sharedv1.CreateImageRequest) (*sharedv1.CreateImageResponse, error) {
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		return nil, err
+	}
+	images, err := cli.ImageList(context.Background(), image.ListOptions{
+		All: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
+		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
+			return t == fmt.Sprintf("pockets:%s", data.Version)
+		})
+		return repoIdx != -1
+	})
+	if imgIdx == -1 {
+		err = CreatePBImage(data.Version)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &sharedv1.CreateImageResponse{}, nil
+}
+
 func CreatePBImage(tag string) error {
 	var err error
 
