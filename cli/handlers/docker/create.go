@@ -1,15 +1,15 @@
 package docker
 
 import (
-	"bytes"
-	"encoding/json"
+	"context"
 	"fmt"
-	"io"
-	"net/http"
 	"time"
 
+	"connectrpc.com/connect"
 	"github.com/charmbracelet/huh/spinner"
 	"github.com/matfire/pockets/cli/config"
+	"github.com/matfire/pockets/cli/rpc"
+	sharedv1 "github.com/matfire/pockets/shared/v1"
 )
 
 type CreateRequestBody struct {
@@ -27,25 +27,25 @@ type ImageCheckResponse struct {
 
 func Create(config *config.App, name string, version string) {
 	imageExists := false
-	checkImage := func() {
-		res, err := http.Get(fmt.Sprintf("%s/v1/image/check/%s", config.Endpoint, version))
-		var data ImageCheckResponse
+	client := rpc.GetRPCCLient(config)
+	checkImage := func() bool {
+		res, err := client.CheckImage(context.Background(), connect.NewRequest(&sharedv1.CheckImageRequest{
+			Version: version,
+		}))
 		if err != nil {
 			panic(err)
 		}
-		b, err := io.ReadAll(res.Body)
-		json.Unmarshal(b, &data)
-		defer res.Body.Close()
-		imageExists = data.Exists
+		imageExists = res.Msg.Exists
+		return res.Msg.Exists
 	}
 
 	createImage := func() {
-		body := ImageCreateRequestBody{Version: version}
-		b, err := json.Marshal(body)
+		_, err := client.CreateImage(context.Background(), connect.NewRequest(&sharedv1.CreateImageRequest{
+			Version: version,
+		}))
 		if err != nil {
-			panic("could not marshal image create request body")
+			panic(err)
 		}
-		_, err = http.Post(fmt.Sprintf("%s/v1/image/new", config.Endpoint), "application/json", bytes.NewBuffer(b))
 	}
 
 	//TODO customize retries & interval
@@ -55,15 +55,9 @@ func Create(config *config.App, name string, version string) {
 			if iterations > 5 {
 				panic("image is taking too long")
 			}
-			res, err := http.Get(fmt.Sprintf("%s/v1/image/check/%s", config.Endpoint, version))
-			if err != nil {
-				break
-			}
-			var data ImageCheckResponse
-			b, err := io.ReadAll(res.Body)
-			json.Unmarshal(b, &data)
-			defer res.Body.Close()
-			if data.Exists {
+
+			exists := checkImage()
+			if exists {
 				break
 			}
 			iterations++
@@ -72,18 +66,18 @@ func Create(config *config.App, name string, version string) {
 	}
 
 	createContainer := func() {
-		body := CreateRequestBody{Name: name, Version: version}
-		b, err := json.Marshal(body)
-		if err != nil {
-			fmt.Printf("could not marshal body in create request \n")
-		}
-		_, err = http.Post(fmt.Sprintf("%s/v1/create", config.Endpoint), "application/json", bytes.NewBuffer(b))
+		_, err := client.CreateContainer(context.Background(), connect.NewRequest(&sharedv1.CreateContainerRequest{
+			Name:    name,
+			Version: version,
+		}))
 		if err != nil {
 			fmt.Printf("create request failed with error %v", err)
 			return
 		}
 	}
-	if err := spinner.New().Title("Checking for image existence...").Action(checkImage).Run(); err != nil {
+	if err := spinner.New().Title("Checking for image existence...").Action(func() {
+		checkImage()
+	}).Run(); err != nil {
 		fmt.Println(err)
 	}
 	if imageExists {
