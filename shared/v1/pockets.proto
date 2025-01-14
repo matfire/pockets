@@ -6,6 +6,7 @@ option go_package = "github.com/matfire/pockets/shared/v1;sharedv1";
 
 service PocketsService {
 	rpc GetContainers(GetContainersRequest) returns (GetContainersResponse) {}
+	rpc CreateContainer(CreateContainerRequest) returns (CreateContainerResponse) {}
 }
 
 message GetContainersRequest {}
@@ -18,4 +19,13 @@ message Container {
 	string id = 1;
 	string name = 2;
 	string status = 3;
+}
+
+message CreateContainerRequest {
+	string name = 1;
+	string version = 2;
+}
+
+message CreateContainerResponse {
+	Container container = 1;
 }
