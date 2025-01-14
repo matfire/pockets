@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"net/http"
 
 	"github.com/charmbracelet/log"
@@ -13,9 +12,10 @@ import (
 	v1 "github.com/matfire/pockets/server/routers/v1"
 	"github.com/matfire/pockets/server/rpc"
 	"github.com/matfire/pockets/server/utils"
-	"github.com/matfire/pockets/shared"
+	"github.com/matfire/pockets/shared/v1/sharedv1connect"
 	"github.com/spf13/viper"
-	"google.golang.org/grpc"
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 )
 
 func main() {
@@ -44,7 +44,7 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprint("hello world")))
 	})
-	port := viper.GetString("PORT")
+	port := viper.GetInt("PORT")
 	adminUser := viper.GetString("ADMIN_USER")
 	adminPassword := viper.GetString("ADMIN_PASSWORD")
 	app := utils.App{
@@ -52,14 +52,10 @@ func main() {
 		AdminPassword: adminPassword,
 	}
 	r.Mount("/v1", v1.GetRouter(&app))
-
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
-	if err != nil {
-		panic(err)
-	}
-	var opts []grpc.ServerOption
-	grpcServer := grpc.NewServer(opts...)
-	shared.RegisterPocketsServer(grpcServer, rpc.NewPocketsService())
-	grpcServer.Serve(lis)
-	log.Info(fmt.Sprintf("listening on port %s", port))
+	pocketServer := rpc.PocketsServer{}
+	path, handler := sharedv1connect.NewPocketsServiceHandler(&pocketServer)
+	mux := http.NewServeMux()
+	mux.Handle(path, handler)
+	log.Info(fmt.Sprintf("listening on port %d", port))
+	http.ListenAndServe(fmt.Sprintf(":%d", port), h2c.NewHandler(mux, &http2.Server{}))
 }

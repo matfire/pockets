@@ -19,6 +19,7 @@ require (
 )
 
 require (
+	connectrpc.com/connect v1.18.1
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect

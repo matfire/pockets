@@ -6,10 +6,10 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
-	"github.com/matfire/pockets/shared"
+	sharedv1 "github.com/matfire/pockets/shared/v1"
 )
 
-func GetContainers() shared.ContainerList {
+func GetContainers() *sharedv1.GetContainersResponse {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
@@ -23,10 +23,10 @@ func GetContainers() shared.ContainerList {
 	if err != nil {
 		panic(err)
 	}
-	res := shared.ContainerList{Containers: []*shared.ContainerObject{}}
+	res := sharedv1.GetContainersResponse{Containers: []*sharedv1.Container{}}
 	for _, c := range containers {
-		res.Containers = append(res.Containers, &shared.ContainerObject{Id: c.ID, Status: c.Status, Name: c.Names[0]})
+		res.Containers = append(res.Containers, &sharedv1.Container{Id: c.ID, Status: c.Status, Name: c.Names[0]})
 	}
-	return res
+	return &res
 
 }
