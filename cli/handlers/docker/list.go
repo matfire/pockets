@@ -1,14 +1,15 @@
 package docker
 
 import (
-	"encoding/json"
+	"context"
 	"fmt"
-	"io"
-	"net/http"
 
+	"connectrpc.com/connect"
 	"github.com/charmbracelet/huh/spinner"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/matfire/pockets/cli/config"
+	"github.com/matfire/pockets/cli/rpc"
+	sharedv1 "github.com/matfire/pockets/shared/v1"
 )
 
 type Container struct {
@@ -21,17 +22,14 @@ type ListResponse struct {
 
 func List(config *config.App) {
 	fmt.Print("listing containers")
-
-	var data ListResponse
+	client := rpc.GetRPCCLient(config)
+	var data *sharedv1.GetContainersResponse
 	getContainers := func() {
-		res, err := http.Get(fmt.Sprintf("%s/v1/status", config.Endpoint))
+		res, err := client.GetContainers(context.Background(), connect.NewRequest(&sharedv1.GetContainersRequest{}))
 		if err != nil {
-			panic("could not get data")
+			panic(err)
 		}
-		b, err := io.ReadAll(res.Body)
-		defer res.Body.Close()
-		json.Unmarshal(b, &data)
-
+		data = res.Msg
 	}
 	if err := spinner.New().Title("Fetching containers...").Action(getContainers).Run(); err != nil {
 		fmt.Println(err)
