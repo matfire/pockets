@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/charmbracelet/log"
 	"github.com/docker/docker/api/types"
@@ -104,5 +105,20 @@ func CreatePBImage(tag string) error {
 		BuildArgs:  map[string]*string{"PB_VERSION": &versionArg},
 		Remove:     true,
 	})
+	tries := 0
+	for {
+		if tries > 5 {
+			log.Error("Got to end of waiting loop; this should not happen")
+			break
+		}
+		//TODO this should be configurable
+		time.Sleep(2 * time.Second)
+		info, _ := CheckImage(&sharedv1.CheckImageRequest{Version: tag})
+		if info.Exists {
+			break
+		} else {
+			tries++
+		}
+	}
 	return err
 }
