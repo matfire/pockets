@@ -19,8 +19,8 @@
 
 ### Server
 
-- Chi Router
 - Docker Sdk
+- [ConnectRPC](https://connectrpc.com)
 
 ## Configuration
 
