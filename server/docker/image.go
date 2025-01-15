@@ -10,6 +10,7 @@ import (
 
 	"github.com/charmbracelet/log"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 	"github.com/matfire/pockets/server/embeds"
@@ -21,22 +22,17 @@ func CheckImage(data *sharedv1.CheckImageRequest) (*sharedv1.CheckImageResponse,
 	if err != nil {
 		return nil, err
 	}
+
 	images, err := cli.ImageList(context.Background(), image.ListOptions{
-		All: true,
+		All:     true,
+		Filters: filters.NewArgs(filters.Arg("reference", fmt.Sprintf("pockets:%s", data.Version))),
 	})
 	if err != nil {
 		return nil, err
 	}
-	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
-		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
-			return t == fmt.Sprintf("pockets:%s", data.Version)
-		})
-		return repoIdx != -1
-	})
-
 	response := sharedv1.CheckImageResponse{}
 
-	if imgIdx == -1 {
+	if len(images) == 0 {
 		response.Exists = false
 	} else {
 		response.Exists = true
