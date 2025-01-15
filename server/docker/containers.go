@@ -150,3 +150,47 @@ func GetContainers() *sharedv1.GetContainersResponse {
 	return &res
 
 }
+
+func StartContainer(data *sharedv1.StartContainerRequest) (*sharedv1.StartContainerResponse, error) {
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+	err = cli.ContainerStart(context.Background(), data.Id, container.StartOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return &sharedv1.StartContainerResponse{
+		Status: true,
+	}, nil
+}
+
+func StopContainer(data *sharedv1.StopContainerRequest) (*sharedv1.StopContainerResponse, error) {
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		return nil, err
+	}
+	err = cli.ContainerStop(context.Background(), data.Id, container.StopOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return &sharedv1.StopContainerResponse{
+		Status: false,
+	}, nil
+}
+
+func DeleteContainer(data *sharedv1.DeleteContainerRequest) (*sharedv1.DeleteContainerResponse, error) {
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		return nil, err
+	}
+	err = cli.ContainerRemove(context.Background(), data.Id, container.RemoveOptions{
+		Force: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &sharedv1.DeleteContainerResponse{
+		Status: true,
+	}, nil
+}

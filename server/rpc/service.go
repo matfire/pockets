@@ -38,3 +38,19 @@ func (s *PocketsServer) CreateImage(ctx context.Context, req *connect.Request[sh
 	res := connect.NewResponse(data)
 	return res, err
 }
+
+func (s *PocketsServer) StartContainer(ctx context.Context, req *connect.Request[sharedv1.StartContainerRequest]) (*connect.Response[sharedv1.StartContainerResponse], error) {
+	data, err := docker.StartContainer(req.Msg)
+	res := connect.NewResponse(data)
+	return res, err
+}
+func (s *PocketsServer) StopContainer(ctx context.Context, req *connect.Request[sharedv1.StopContainerRequest]) (*connect.Response[sharedv1.StopContainerResponse], error) {
+	data, err := docker.StopContainer(req.Msg)
+	res := connect.NewResponse(data)
+	return res, err
+}
+func (s *PocketsServer) DeleteContainer(ctx context.Context, req *connect.Request[sharedv1.DeleteContainerRequest]) (*connect.Response[sharedv1.DeleteContainerResponse], error) {
+	data, err := docker.DeleteContainer(req.Msg)
+	res := connect.NewResponse(data)
+	return res, err
+}

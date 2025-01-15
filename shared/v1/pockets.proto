@@ -9,6 +9,9 @@ service PocketsService {
 	rpc CreateContainer(CreateContainerRequest) returns (CreateContainerResponse) {}
 	rpc CheckImage(CheckImageRequest) returns (CheckImageResponse) {}
 	rpc CreateImage(CreateImageRequest) returns (CreateImageResponse) {}
+	rpc StartContainer(StartContainerRequest) returns (StartContainerResponse) {}
+	rpc StopContainer(StopContainerRequest) returns (StopContainerResponse) {}
+	rpc DeleteContainer(DeleteContainerRequest) returns (DeleteContainerResponse) {}
 }
 
 message GetContainersRequest {}
@@ -46,4 +49,28 @@ message CreateImageRequest {
 
 message CreateImageResponse {
 
+}
+
+message StartContainerRequest {
+	string id = 1;
+}
+
+message StartContainerResponse {
+	bool status = 1;
+}
+
+message StopContainerRequest {
+	string id = 1;
+}
+
+message StopContainerResponse {
+	bool status = 1;
+}
+
+message DeleteContainerRequest {
+	string id = 1;
+}
+
+message DeleteContainerResponse {
+	bool status = 1;
 }
