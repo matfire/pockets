@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"slices"
 	"strings"
 	"time"
 
@@ -19,46 +18,39 @@ import (
 )
 
 func CheckImage(data *sharedv1.CheckImageRequest) (*sharedv1.CheckImageResponse, error) {
-	cli, err := client.NewClientWithOpts(client.FromEnv)
+	exists, err := checkImage(data.Version)
 	if err != nil {
 		return nil, err
 	}
-
-	images, err := cli.ImageList(context.Background(), image.ListOptions{
-		All:     true,
-		Filters: filters.NewArgs(filters.Arg("reference", fmt.Sprintf("pockets:%s", data.Version))),
-	})
-	if err != nil {
-		return nil, err
-	}
-	response := sharedv1.CheckImageResponse{}
-
-	if len(images) == 0 {
-		response.Exists = false
-	} else {
-		response.Exists = true
+	response := sharedv1.CheckImageResponse{
+		Exists: exists,
 	}
 	return &response, nil
 }
 
-func CreateImage(data *sharedv1.CreateImageRequest) (*sharedv1.CreateImageResponse, error) {
+func checkImage(version string) (bool, error) {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		return nil, err
+		return false, err
 	}
+
 	images, err := cli.ImageList(context.Background(), image.ListOptions{
-		All: true,
+		All:     true,
+		Filters: filters.NewArgs(filters.Arg("reference", fmt.Sprintf("pockets:%s", version))),
 	})
+	if err != nil {
+		return false, err
+	}
+
+	return len(images) != 0, nil
+}
+
+func CreateImage(data *sharedv1.CreateImageRequest) (*sharedv1.CreateImageResponse, error) {
+	exists, err := checkImage(data.Version)
 	if err != nil {
 		return nil, err
 	}
-	imgIdx := slices.IndexFunc(images, func(el image.Summary) bool {
-		repoIdx := slices.IndexFunc(el.RepoTags, func(t string) bool {
-			return t == fmt.Sprintf("pockets:%s", data.Version)
-		})
-		return repoIdx != -1
-	})
-	if imgIdx == -1 {
+	if !exists {
 		err = CreatePBImage(data.Version)
 		if err != nil {
 			return nil, err
