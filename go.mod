@@ -9,6 +9,7 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/docker/docker v27.5.0+incompatible
 	github.com/docker/go-connections v0.5.0
+	github.com/google/uuid v1.6.0
 	github.com/jsumners/go-getport v1.0.0
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
