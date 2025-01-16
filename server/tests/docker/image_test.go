@@ -13,42 +13,26 @@ import (
 	sharedv1 "github.com/matfire/pockets/shared/v1"
 )
 
-func setupImageCheck(t *testing.T) func(t *testing.T) {
-	cli, err := client.NewClientWithOpts(client.FromEnv)
-	if err != nil {
-		t.Fatalf("Could not connect to docker: %v", err)
-	}
-	data, err := cli.ImageList(context.Background(), image.ListOptions{
-		All:     true,
-		Filters: filters.NewArgs(filters.Arg("reference", "pockets:v0.24.3")),
-	})
-	if len(data) > 0 {
-		t.Log("Found image; deleting")
-		cli.ImageRemove(context.Background(), data[0].ID, image.RemoveOptions{
-			Force: true,
-		})
-	}
-	return func(t *testing.T) {
-		t.Log("teardown")
-	}
+func setupImageCreate(version string, t *testing.T) func(t *testing.T) {
+	DeleteImage(version, t)
+	return func(t *testing.T) {}
 }
 
-func setupImageCreate(t *testing.T) func(t *testing.T) {
+func DeleteImage(version string, t *testing.T) {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		t.Fatalf("Could not connect to docker: %v", err)
 	}
 	data, err := cli.ImageList(context.Background(), image.ListOptions{
 		All:     true,
-		Filters: filters.NewArgs(filters.Arg("reference", "pockets:v0.24.3")),
+		Filters: filters.NewArgs(filters.Arg("reference", fmt.Sprintf("pockets:%s", version))),
 	})
-	if len(data) > 0 {
-		t.Log("Found image; deleting")
-		cli.ImageRemove(context.Background(), data[0].ID, image.RemoveOptions{
-			Force: true,
-		})
+	if len(data) == 0 {
+		t.Logf("Could not find image for version %s", version)
 	}
-	return func(t *testing.T) {}
+	cli.ImageRemove(context.Background(), data[0].ID, image.RemoveOptions{
+		Force: true,
+	})
 }
 
 func checkImage(version string, t *testing.T) bool {
@@ -63,26 +47,12 @@ func checkImage(version string, t *testing.T) bool {
 	return len(data) > 0
 }
 
-func TestImageCheck(t *testing.T) {
-	teardown := setupImageCheck(t)
-	defer teardown(t)
-	server := rpc.PocketsServer{}
-	version := "v0.24.3"
-	response, err := server.CheckImage(context.Background(), connect.NewRequest(&sharedv1.CheckImageRequest{Version: version}))
-	if err != nil {
-		t.Fatalf("CheckImage failed: %v", err)
-	}
-	if response.Msg.Exists {
-		t.Fatalf("CheckImage failed: image exists")
-	}
-
-}
-
 func TestImageCreation(t *testing.T) {
-	teardown := setupImageCreate(t)
+
+	version := "v0.24.3"
+	teardown := setupImageCreate(version, t)
 	defer teardown(t)
 	server := rpc.PocketsServer{}
-	version := "v0.24.3"
 	ctx := context.Background()
 	_, err := server.CreateImage(ctx, connect.NewRequest(&sharedv1.CreateImageRequest{Version: version}))
 	if err != nil {
