@@ -1,30 +1,26 @@
 package docker
 
 import (
+	"context"
 	"fmt"
-	"net/http"
 
+	"connectrpc.com/connect"
 	"github.com/charmbracelet/huh/spinner"
 	"github.com/matfire/pockets/cli/config"
+	"github.com/matfire/pockets/cli/rpc"
+	sharedv1 "github.com/matfire/pockets/shared/v1"
 )
 
 func Start(config *config.App, name string) {
 	var err error
-	stopContainer := func() {
-		request, requestError := http.NewRequest(http.MethodPut, fmt.Sprintf("%s/v1/start/%s", config.Endpoint, name), nil)
-		if requestError != nil {
-			fmt.Printf("create request failed with error %v", requestError)
-			return
-		}
-		client := &http.Client{}
-		_, requestError = client.Do(request)
-		if requestError != nil {
-			fmt.Printf("create request failed with error %v", requestError)
-			return
-		}
-		err = requestError
+	client := rpc.GetRPCCLient(config)
+	startContainer := func() {
+		_, errr := client.StartContainer(context.Background(), connect.NewRequest(&sharedv1.StartContainerRequest{
+			Id: name,
+		}))
+		err = errr
 	}
-	if spinnerErr := spinner.New().Title("Starting Container...").Action(stopContainer).Run(); spinnerErr != nil {
+	if spinnerErr := spinner.New().Title("Starting Container...").Action(startContainer).Run(); spinnerErr != nil {
 		fmt.Println(spinnerErr)
 	}
 	if err != nil {
