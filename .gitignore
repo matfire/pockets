@@ -1,3 +1,7 @@
 tmp/
 
 dist/
+/shared/**/*.go
+docs/.vitepress/dist
+docs/.vitepress/cache
+node_modules
