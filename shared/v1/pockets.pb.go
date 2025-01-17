@@ -160,6 +160,533 @@ func (x *Container) GetStatus() string {
 	return ""
 }
 
+type CreateContainerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateContainerRequest) Reset() {
+	*x = CreateContainerRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateContainerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateContainerRequest) ProtoMessage() {}
+
+func (x *CreateContainerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateContainerRequest.ProtoReflect.Descriptor instead.
+func (*CreateContainerRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateContainerRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateContainerRequest) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+type CreateContainerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Container     *Container             `protobuf:"bytes,1,opt,name=container,proto3" json:"container,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateContainerResponse) Reset() {
+	*x = CreateContainerResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateContainerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateContainerResponse) ProtoMessage() {}
+
+func (x *CreateContainerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateContainerResponse.ProtoReflect.Descriptor instead.
+func (*CreateContainerResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateContainerResponse) GetContainer() *Container {
+	if x != nil {
+		return x.Container
+	}
+	return nil
+}
+
+type CheckImageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckImageRequest) Reset() {
+	*x = CheckImageRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckImageRequest) ProtoMessage() {}
+
+func (x *CheckImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckImageRequest.ProtoReflect.Descriptor instead.
+func (*CheckImageRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CheckImageRequest) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+type CheckImageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Exists        bool                   `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckImageResponse) Reset() {
+	*x = CheckImageResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckImageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckImageResponse) ProtoMessage() {}
+
+func (x *CheckImageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckImageResponse.ProtoReflect.Descriptor instead.
+func (*CheckImageResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CheckImageResponse) GetExists() bool {
+	if x != nil {
+		return x.Exists
+	}
+	return false
+}
+
+type CreateImageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateImageRequest) Reset() {
+	*x = CreateImageRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateImageRequest) ProtoMessage() {}
+
+func (x *CreateImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateImageRequest.ProtoReflect.Descriptor instead.
+func (*CreateImageRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateImageRequest) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+type CreateImageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateImageResponse) Reset() {
+	*x = CreateImageResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateImageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateImageResponse) ProtoMessage() {}
+
+func (x *CreateImageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateImageResponse.ProtoReflect.Descriptor instead.
+func (*CreateImageResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{8}
+}
+
+type StartContainerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartContainerRequest) Reset() {
+	*x = StartContainerRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartContainerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartContainerRequest) ProtoMessage() {}
+
+func (x *StartContainerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartContainerRequest.ProtoReflect.Descriptor instead.
+func (*StartContainerRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *StartContainerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type StartContainerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartContainerResponse) Reset() {
+	*x = StartContainerResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartContainerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartContainerResponse) ProtoMessage() {}
+
+func (x *StartContainerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartContainerResponse.ProtoReflect.Descriptor instead.
+func (*StartContainerResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *StartContainerResponse) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+type StopContainerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopContainerRequest) Reset() {
+	*x = StopContainerRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopContainerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopContainerRequest) ProtoMessage() {}
+
+func (x *StopContainerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopContainerRequest.ProtoReflect.Descriptor instead.
+func (*StopContainerRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *StopContainerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type StopContainerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopContainerResponse) Reset() {
+	*x = StopContainerResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopContainerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopContainerResponse) ProtoMessage() {}
+
+func (x *StopContainerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopContainerResponse.ProtoReflect.Descriptor instead.
+func (*StopContainerResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *StopContainerResponse) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+type DeleteContainerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteContainerRequest) Reset() {
+	*x = DeleteContainerRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteContainerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteContainerRequest) ProtoMessage() {}
+
+func (x *DeleteContainerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteContainerRequest.ProtoReflect.Descriptor instead.
+func (*DeleteContainerRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *DeleteContainerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type DeleteContainerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        bool                   `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteContainerResponse) Reset() {
+	*x = DeleteContainerResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteContainerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteContainerResponse) ProtoMessage() {}
+
+func (x *DeleteContainerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteContainerResponse.ProtoReflect.Descriptor instead.
+func (*DeleteContainerResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DeleteContainerResponse) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
 var File_shared_v1_pockets_proto protoreflect.FileDescriptor
 
 var file_shared_v1_pockets_proto_rawDesc = []byte{
@@ -176,6 +703,86 @@ var file_shared_v1_pockets_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06,
 	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x22, 0x46, 0x0a, 0x16, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f,
+	0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4d, 0x0a, 0x17,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x32, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x74, 0x61,
+	0x69, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x73, 0x68, 0x61,
+	0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72,
+	0x52, 0x09, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x22, 0x2d, 0x0a, 0x11, 0x43,
+	0x68, 0x65, 0x63, 0x6b, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x2c, 0x0a, 0x12, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x16, 0x0a, 0x06, 0x65, 0x78, 0x69, 0x73, 0x74, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x06, 0x65, 0x78, 0x69, 0x73, 0x74, 0x73, 0x22, 0x2e, 0x0a, 0x12, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18,
+	0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x15, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x27, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x30, 0x0a, 0x16, 0x53, 0x74, 0x61, 0x72,
+	0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x26, 0x0a, 0x14, 0x53, 0x74,
+	0x6f, 0x70, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x2f, 0x0a, 0x15, 0x53, 0x74, 0x6f, 0x70, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69,
+	0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x22, 0x28, 0x0a, 0x16, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e,
+	0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x31, 0x0a,
+	0x17, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x32, 0xea, 0x04, 0x0a, 0x0e, 0x50, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x54, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69,
+	0x6e, 0x65, 0x72, 0x73, 0x12, 0x1f, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31,
+	0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76,
+	0x31, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5a, 0x0a, 0x0f, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x12, 0x21, 0x2e, 0x73,
+	0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43,
+	0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x22, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4b, 0x0a, 0x0a, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x49, 0x6d,
+	0x61, 0x67, 0x65, 0x12, 0x1c, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e,
+	0x43, 0x68, 0x65, 0x63, 0x6b, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x1d, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x4e, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67,
+	0x65, 0x12, 0x1d, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1e, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x57, 0x0a, 0x0e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61,
+	0x69, 0x6e, 0x65, 0x72, 0x12, 0x20, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31,
+	0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e,
+	0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65,
+	0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x54, 0x0a, 0x0d, 0x53,
+	0x74, 0x6f, 0x70, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x12, 0x1f, 0x2e, 0x73,
+	0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x6f, 0x70, 0x43, 0x6f, 0x6e,
+	0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e,
+	0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x6f, 0x70, 0x43, 0x6f,
+	0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x5a, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61,
+	0x69, 0x6e, 0x65, 0x72, 0x12, 0x21, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x2e, 0x76, 0x31,
+	0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64,
+	0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x69,
+	0x6e, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x2f, 0x5a,
+	0x2d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x61, 0x74, 0x66,
+	0x69, 0x72, 0x65, 0x2f, 0x70, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x2f, 0x73, 0x68, 0x61, 0x72,
+	0x65, 0x64, 0x2f, 0x76, 0x31, 0x3b, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x76, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 	0x61, 0x74, 0x75, 0x73, 0x32, 0x66, 0x0a, 0x0e, 0x50, 0x6f, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x54, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e,
 	0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x73, 0x12, 0x1f, 0x2e, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64,
@@ -200,6 +807,47 @@ func file_shared_v1_pockets_proto_rawDescGZIP() []byte {
 	})
 	return file_shared_v1_pockets_proto_rawDescData
 }
+
+var file_shared_v1_pockets_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_shared_v1_pockets_proto_goTypes = []any{
+	(*GetContainersRequest)(nil),    // 0: shared.v1.GetContainersRequest
+	(*GetContainersResponse)(nil),   // 1: shared.v1.GetContainersResponse
+	(*Container)(nil),               // 2: shared.v1.Container
+	(*CreateContainerRequest)(nil),  // 3: shared.v1.CreateContainerRequest
+	(*CreateContainerResponse)(nil), // 4: shared.v1.CreateContainerResponse
+	(*CheckImageRequest)(nil),       // 5: shared.v1.CheckImageRequest
+	(*CheckImageResponse)(nil),      // 6: shared.v1.CheckImageResponse
+	(*CreateImageRequest)(nil),      // 7: shared.v1.CreateImageRequest
+	(*CreateImageResponse)(nil),     // 8: shared.v1.CreateImageResponse
+	(*StartContainerRequest)(nil),   // 9: shared.v1.StartContainerRequest
+	(*StartContainerResponse)(nil),  // 10: shared.v1.StartContainerResponse
+	(*StopContainerRequest)(nil),    // 11: shared.v1.StopContainerRequest
+	(*StopContainerResponse)(nil),   // 12: shared.v1.StopContainerResponse
+	(*DeleteContainerRequest)(nil),  // 13: shared.v1.DeleteContainerRequest
+	(*DeleteContainerResponse)(nil), // 14: shared.v1.DeleteContainerResponse
+}
+var file_shared_v1_pockets_proto_depIdxs = []int32{
+	2,  // 0: shared.v1.GetContainersResponse.containers:type_name -> shared.v1.Container
+	2,  // 1: shared.v1.CreateContainerResponse.container:type_name -> shared.v1.Container
+	0,  // 2: shared.v1.PocketsService.GetContainers:input_type -> shared.v1.GetContainersRequest
+	3,  // 3: shared.v1.PocketsService.CreateContainer:input_type -> shared.v1.CreateContainerRequest
+	5,  // 4: shared.v1.PocketsService.CheckImage:input_type -> shared.v1.CheckImageRequest
+	7,  // 5: shared.v1.PocketsService.CreateImage:input_type -> shared.v1.CreateImageRequest
+	9,  // 6: shared.v1.PocketsService.StartContainer:input_type -> shared.v1.StartContainerRequest
+	11, // 7: shared.v1.PocketsService.StopContainer:input_type -> shared.v1.StopContainerRequest
+	13, // 8: shared.v1.PocketsService.DeleteContainer:input_type -> shared.v1.DeleteContainerRequest
+	1,  // 9: shared.v1.PocketsService.GetContainers:output_type -> shared.v1.GetContainersResponse
+	4,  // 10: shared.v1.PocketsService.CreateContainer:output_type -> shared.v1.CreateContainerResponse
+	6,  // 11: shared.v1.PocketsService.CheckImage:output_type -> shared.v1.CheckImageResponse
+	8,  // 12: shared.v1.PocketsService.CreateImage:output_type -> shared.v1.CreateImageResponse
+	10, // 13: shared.v1.PocketsService.StartContainer:output_type -> shared.v1.StartContainerResponse
+	12, // 14: shared.v1.PocketsService.StopContainer:output_type -> shared.v1.StopContainerResponse
+	14, // 15: shared.v1.PocketsService.DeleteContainer:output_type -> shared.v1.DeleteContainerResponse
+	9,  // [9:16] is the sub-list for method output_type
+	2,  // [2:9] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 
 var file_shared_v1_pockets_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_shared_v1_pockets_proto_goTypes = []any{
@@ -229,6 +877,7 @@ func file_shared_v1_pockets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_shared_v1_pockets_proto_rawDesc,
 			NumEnums:      0,
+			NumMessages:   15,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
