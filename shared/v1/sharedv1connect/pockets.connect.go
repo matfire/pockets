@@ -36,11 +36,35 @@ const (
 	// PocketsServiceGetContainersProcedure is the fully-qualified name of the PocketsService's
 	// GetContainers RPC.
 	PocketsServiceGetContainersProcedure = "/shared.v1.PocketsService/GetContainers"
+	// PocketsServiceCreateContainerProcedure is the fully-qualified name of the PocketsService's
+	// CreateContainer RPC.
+	PocketsServiceCreateContainerProcedure = "/shared.v1.PocketsService/CreateContainer"
+	// PocketsServiceCheckImageProcedure is the fully-qualified name of the PocketsService's CheckImage
+	// RPC.
+	PocketsServiceCheckImageProcedure = "/shared.v1.PocketsService/CheckImage"
+	// PocketsServiceCreateImageProcedure is the fully-qualified name of the PocketsService's
+	// CreateImage RPC.
+	PocketsServiceCreateImageProcedure = "/shared.v1.PocketsService/CreateImage"
+	// PocketsServiceStartContainerProcedure is the fully-qualified name of the PocketsService's
+	// StartContainer RPC.
+	PocketsServiceStartContainerProcedure = "/shared.v1.PocketsService/StartContainer"
+	// PocketsServiceStopContainerProcedure is the fully-qualified name of the PocketsService's
+	// StopContainer RPC.
+	PocketsServiceStopContainerProcedure = "/shared.v1.PocketsService/StopContainer"
+	// PocketsServiceDeleteContainerProcedure is the fully-qualified name of the PocketsService's
+	// DeleteContainer RPC.
+	PocketsServiceDeleteContainerProcedure = "/shared.v1.PocketsService/DeleteContainer"
 )
 
 // PocketsServiceClient is a client for the shared.v1.PocketsService service.
 type PocketsServiceClient interface {
 	GetContainers(context.Context, *connect.Request[v1.GetContainersRequest]) (*connect.Response[v1.GetContainersResponse], error)
+	CreateContainer(context.Context, *connect.Request[v1.CreateContainerRequest]) (*connect.Response[v1.CreateContainerResponse], error)
+	CheckImage(context.Context, *connect.Request[v1.CheckImageRequest]) (*connect.Response[v1.CheckImageResponse], error)
+	CreateImage(context.Context, *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.CreateImageResponse], error)
+	StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error)
+	StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error)
+	DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error)
 }
 
 // NewPocketsServiceClient constructs a client for the shared.v1.PocketsService service. By default,
@@ -60,12 +84,54 @@ func NewPocketsServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pocketsServiceMethods.ByName("GetContainers")),
 			connect.WithClientOptions(opts...),
 		),
+		createContainer: connect.NewClient[v1.CreateContainerRequest, v1.CreateContainerResponse](
+			httpClient,
+			baseURL+PocketsServiceCreateContainerProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("CreateContainer")),
+			connect.WithClientOptions(opts...),
+		),
+		checkImage: connect.NewClient[v1.CheckImageRequest, v1.CheckImageResponse](
+			httpClient,
+			baseURL+PocketsServiceCheckImageProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("CheckImage")),
+			connect.WithClientOptions(opts...),
+		),
+		createImage: connect.NewClient[v1.CreateImageRequest, v1.CreateImageResponse](
+			httpClient,
+			baseURL+PocketsServiceCreateImageProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("CreateImage")),
+			connect.WithClientOptions(opts...),
+		),
+		startContainer: connect.NewClient[v1.StartContainerRequest, v1.StartContainerResponse](
+			httpClient,
+			baseURL+PocketsServiceStartContainerProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("StartContainer")),
+			connect.WithClientOptions(opts...),
+		),
+		stopContainer: connect.NewClient[v1.StopContainerRequest, v1.StopContainerResponse](
+			httpClient,
+			baseURL+PocketsServiceStopContainerProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("StopContainer")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteContainer: connect.NewClient[v1.DeleteContainerRequest, v1.DeleteContainerResponse](
+			httpClient,
+			baseURL+PocketsServiceDeleteContainerProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("DeleteContainer")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // pocketsServiceClient implements PocketsServiceClient.
 type pocketsServiceClient struct {
-	getContainers *connect.Client[v1.GetContainersRequest, v1.GetContainersResponse]
+	getContainers   *connect.Client[v1.GetContainersRequest, v1.GetContainersResponse]
+	createContainer *connect.Client[v1.CreateContainerRequest, v1.CreateContainerResponse]
+	checkImage      *connect.Client[v1.CheckImageRequest, v1.CheckImageResponse]
+	createImage     *connect.Client[v1.CreateImageRequest, v1.CreateImageResponse]
+	startContainer  *connect.Client[v1.StartContainerRequest, v1.StartContainerResponse]
+	stopContainer   *connect.Client[v1.StopContainerRequest, v1.StopContainerResponse]
+	deleteContainer *connect.Client[v1.DeleteContainerRequest, v1.DeleteContainerResponse]
 }
 
 // GetContainers calls shared.v1.PocketsService.GetContainers.
@@ -73,9 +139,45 @@ func (c *pocketsServiceClient) GetContainers(ctx context.Context, req *connect.R
 	return c.getContainers.CallUnary(ctx, req)
 }
 
+// CreateContainer calls shared.v1.PocketsService.CreateContainer.
+func (c *pocketsServiceClient) CreateContainer(ctx context.Context, req *connect.Request[v1.CreateContainerRequest]) (*connect.Response[v1.CreateContainerResponse], error) {
+	return c.createContainer.CallUnary(ctx, req)
+}
+
+// CheckImage calls shared.v1.PocketsService.CheckImage.
+func (c *pocketsServiceClient) CheckImage(ctx context.Context, req *connect.Request[v1.CheckImageRequest]) (*connect.Response[v1.CheckImageResponse], error) {
+	return c.checkImage.CallUnary(ctx, req)
+}
+
+// CreateImage calls shared.v1.PocketsService.CreateImage.
+func (c *pocketsServiceClient) CreateImage(ctx context.Context, req *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.CreateImageResponse], error) {
+	return c.createImage.CallUnary(ctx, req)
+}
+
+// StartContainer calls shared.v1.PocketsService.StartContainer.
+func (c *pocketsServiceClient) StartContainer(ctx context.Context, req *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error) {
+	return c.startContainer.CallUnary(ctx, req)
+}
+
+// StopContainer calls shared.v1.PocketsService.StopContainer.
+func (c *pocketsServiceClient) StopContainer(ctx context.Context, req *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error) {
+	return c.stopContainer.CallUnary(ctx, req)
+}
+
+// DeleteContainer calls shared.v1.PocketsService.DeleteContainer.
+func (c *pocketsServiceClient) DeleteContainer(ctx context.Context, req *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error) {
+	return c.deleteContainer.CallUnary(ctx, req)
+}
+
 // PocketsServiceHandler is an implementation of the shared.v1.PocketsService service.
 type PocketsServiceHandler interface {
 	GetContainers(context.Context, *connect.Request[v1.GetContainersRequest]) (*connect.Response[v1.GetContainersResponse], error)
+	CreateContainer(context.Context, *connect.Request[v1.CreateContainerRequest]) (*connect.Response[v1.CreateContainerResponse], error)
+	CheckImage(context.Context, *connect.Request[v1.CheckImageRequest]) (*connect.Response[v1.CheckImageResponse], error)
+	CreateImage(context.Context, *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.CreateImageResponse], error)
+	StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error)
+	StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error)
+	DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error)
 }
 
 // NewPocketsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +193,58 @@ func NewPocketsServiceHandler(svc PocketsServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pocketsServiceMethods.ByName("GetContainers")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pocketsServiceCreateContainerHandler := connect.NewUnaryHandler(
+		PocketsServiceCreateContainerProcedure,
+		svc.CreateContainer,
+		connect.WithSchema(pocketsServiceMethods.ByName("CreateContainer")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pocketsServiceCheckImageHandler := connect.NewUnaryHandler(
+		PocketsServiceCheckImageProcedure,
+		svc.CheckImage,
+		connect.WithSchema(pocketsServiceMethods.ByName("CheckImage")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pocketsServiceCreateImageHandler := connect.NewUnaryHandler(
+		PocketsServiceCreateImageProcedure,
+		svc.CreateImage,
+		connect.WithSchema(pocketsServiceMethods.ByName("CreateImage")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pocketsServiceStartContainerHandler := connect.NewUnaryHandler(
+		PocketsServiceStartContainerProcedure,
+		svc.StartContainer,
+		connect.WithSchema(pocketsServiceMethods.ByName("StartContainer")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pocketsServiceStopContainerHandler := connect.NewUnaryHandler(
+		PocketsServiceStopContainerProcedure,
+		svc.StopContainer,
+		connect.WithSchema(pocketsServiceMethods.ByName("StopContainer")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pocketsServiceDeleteContainerHandler := connect.NewUnaryHandler(
+		PocketsServiceDeleteContainerProcedure,
+		svc.DeleteContainer,
+		connect.WithSchema(pocketsServiceMethods.ByName("DeleteContainer")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/shared.v1.PocketsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PocketsServiceGetContainersProcedure:
 			pocketsServiceGetContainersHandler.ServeHTTP(w, r)
+		case PocketsServiceCreateContainerProcedure:
+			pocketsServiceCreateContainerHandler.ServeHTTP(w, r)
+		case PocketsServiceCheckImageProcedure:
+			pocketsServiceCheckImageHandler.ServeHTTP(w, r)
+		case PocketsServiceCreateImageProcedure:
+			pocketsServiceCreateImageHandler.ServeHTTP(w, r)
+		case PocketsServiceStartContainerProcedure:
+			pocketsServiceStartContainerHandler.ServeHTTP(w, r)
+		case PocketsServiceStopContainerProcedure:
+			pocketsServiceStopContainerHandler.ServeHTTP(w, r)
+		case PocketsServiceDeleteContainerProcedure:
+			pocketsServiceDeleteContainerHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +256,28 @@ type UnimplementedPocketsServiceHandler struct{}
 
 func (UnimplementedPocketsServiceHandler) GetContainers(context.Context, *connect.Request[v1.GetContainersRequest]) (*connect.Response[v1.GetContainersResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.GetContainers is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) CreateContainer(context.Context, *connect.Request[v1.CreateContainerRequest]) (*connect.Response[v1.CreateContainerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.CreateContainer is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) CheckImage(context.Context, *connect.Request[v1.CheckImageRequest]) (*connect.Response[v1.CheckImageResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.CheckImage is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) CreateImage(context.Context, *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.CreateImageResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.CreateImage is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.StartContainer is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.StopContainer is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.DeleteContainer is not implemented"))
 }
