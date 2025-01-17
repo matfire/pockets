@@ -54,6 +54,7 @@ const (
 	// PocketsServiceDeleteContainerProcedure is the fully-qualified name of the PocketsService's
 	// DeleteContainer RPC.
 	PocketsServiceDeleteContainerProcedure = "/shared.v1.PocketsService/DeleteContainer"
+
 )
 
 // PocketsServiceClient is a client for the shared.v1.PocketsService service.
@@ -132,6 +133,7 @@ type pocketsServiceClient struct {
 	startContainer  *connect.Client[v1.StartContainerRequest, v1.StartContainerResponse]
 	stopContainer   *connect.Client[v1.StopContainerRequest, v1.StopContainerResponse]
 	deleteContainer *connect.Client[v1.DeleteContainerRequest, v1.DeleteContainerResponse]
+	getContainers *connect.Client[v1.GetContainersRequest, v1.GetContainersResponse]
 }
 
 // GetContainers calls shared.v1.PocketsService.GetContainers.
@@ -178,6 +180,9 @@ type PocketsServiceHandler interface {
 	StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error)
 	StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error)
 	DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error)
+// PocketsServiceHandler is an implementation of the shared.v1.PocketsService service.
+type PocketsServiceHandler interface {
+	GetContainers(context.Context, *connect.Request[v1.GetContainersRequest]) (*connect.Response[v1.GetContainersResponse], error)
 }
 
 // NewPocketsServiceHandler builds an HTTP handler from the service implementation. It returns the
