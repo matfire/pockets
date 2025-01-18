@@ -11,6 +11,7 @@
     "prepare": "cp ../shared/v1/pockets.proto ."
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.2.0",
     "@astrojs/starlight": "^0.31.1",
     "astro": "^5.1.5",
     "sharp": "^0.32.5"
