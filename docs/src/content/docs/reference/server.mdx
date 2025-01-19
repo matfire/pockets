@@ -2,8 +2,22 @@
 title: "Server Configuration"
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Code } from '@astrojs/starlight/components';
+import exampleConfig from "../../../assets/example.server.toml?raw"
 
 <Aside type='caution'>This is not final, check back regularly for un up to date referece</Aside>
 
+## Example Configuration
+
+<Aside>The configuration can be written in either toml or yaml format</Aside>
+
+<Code lang='toml' title="pockets.toml" code={exampleConfig} />
+
+
 ## Configuration Options
+
+<Aside>All of these configuration values can also be passed as environment variables with the prefix PKTS_</Aside>
+
+- PORT: defines the port the http server will listen on (defaults to 3000)
+- admin_user: defines the default superuser email used on new instances
+- admin_password: defines the default superuser password used on new instances

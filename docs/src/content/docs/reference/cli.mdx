@@ -1,11 +1,78 @@
 ---
 title: "CLI Configuration"
 ---
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Code } from '@astrojs/starlight/components';
+import exampleConfig from "../../../assets/example.cli.toml?raw"
+
 
 <Aside type='caution'>This is not final, check back regularly for un up to date referece</Aside>
 
 ## Configuration Options
 
+<Aside>The configuration can be written in either toml or yaml format</Aside>
+
+<Code lang='toml' title="pockets.toml" code={exampleConfig} />
+
 
 ## Available Commands
+
+- create
+- list
+- start
+- stop
+- delete
+
+### Create
+
+Creates a new container with the specified name and version
+
+<Code code='pocketsctl create test-1' lang="sh" />
+
+#### Args
+
+| name | optional | description |
+| --- |---|---|
+| name | true | the name for the container to create |
+
+### List
+
+Displays a list of existing containers as well as their status (i.e. for how long they have been running)
+
+<Code code='pocketsctl list' lang="sh" />
+
+### Start
+
+Starts the specified container
+
+<Code code='pocketsctl start <id_of_the_container>' lang="sh" />
+
+#### Args
+
+| name | optional | description |
+| --- |---|---|
+| id | true | the id of the container to start |
+
+### Stop
+
+Stops the specified container
+
+<Code code='pocketsctl stop <id_of_the_container>' lang="sh" />
+
+#### Args
+
+| name | optional | description |
+| --- |---|---|
+| id | true | the id of the container to stop |
+
+### Delete
+
+Delete the specified container
+
+<Code code='pocketsctl delete <id_of_the_container>' lang="sh" />
+
+#### Args
+
+| name | optional | description |
+| --- |---|---|
+| id | true | the id of the container to delete |
+| --force | true | skips asking for confirmation before deleting the container |
