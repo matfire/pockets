@@ -1,0 +1,100 @@
+---
+import FeatureCard from '../components/FeatureCard.astro';
+import { Icon } from 'astro-icon/components'
+import { icons } from '../components/icons/index'
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pockets - PocketBase Manager</title>
+    <meta name="description" content="Manage multiple PocketBase instances with ease using Pockets" />
+  </head>
+  <body>
+    <div class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <!-- Hero Section -->
+      <header class="container mx-auto px-6 py-16 md:py-24">
+        <nav class="flex justify-between items-center mb-16">
+          <div class="flex items-center gap-2 text-xl font-bold">
+		<icons.Database size={32} />
+            <span>Pockets</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
+            <a href="https://github.com" class="flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+			  <Icon name="simple-icons:github" />
+              GitHub
+            </a>
+          </div>
+        </nav>
+
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6">
+            Manage Your PocketBase Instances with Ease
+          </h1>
+          <p class="text-xl text-slate-300 mb-8">
+            The ultimate tool for developers to manage, monitor, and maintain multiple PocketBase instances from a single dashboard.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://docs.pockets.matteogassend.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+              Get Started
+              <icons.ChevronRight size={20} />
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Features Section -->
+      <section id="features" class="py-20 bg-slate-800/50">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold text-center mb-16">Everything You Need to Manage PocketBase</h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard
+              title="Multiple Instances"
+              description="Manage all your PocketBase instances from a single, intuitive dashboard."
+            >
+              <icons.Layers slot="icon" size={24} />
+            </FeatureCard>
+            <FeatureCard
+              title="Easy Configuration"
+              description="Configure your instances with a user-friendly interface (or cli)."
+            >
+              <icons.Settings slot="icon" size={24} />
+            </FeatureCard>
+            <FeatureCard
+              title="Quick Actions"
+              description="Perform common tasks with one-click actions and shortcuts."
+            >
+              <icons.Zap slot="icon" size={24} />
+            </FeatureCard>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-20">
+        <div class="container mx-auto px-6 text-center">
+          <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6">Ready to Simplify Your PocketBase Management?</h2>
+            <p class="text-slate-300 mb-8">
+              Join developers who are already using Pockets to streamline their PocketBase workflow.
+            </p>
+            <a href="https://docs.pockets.matteogassend.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg">
+              Start Managing Now
+              <icons.ChevronRight size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-slate-700 py-8">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+          <p> {new Date().getFullYear()} Pockets. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
