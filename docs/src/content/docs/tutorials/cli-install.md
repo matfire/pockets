@@ -39,7 +39,7 @@ After downloading:
 2. Move the binary to a location in your system PATH (optional)
 3. Make the binary executable (Unix-based systems only):
    ```bash
-   chmod +x ./pockets-cli
+   chmod +x ./pocketsctl
    ```
 
 ## Homebrew
