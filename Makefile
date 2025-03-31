@@ -1,5 +1,5 @@
 build/proto:
-	buf generate
+	npx buf generate
 build/server:
 	go build ./server
 build/cli:
@@ -7,3 +7,9 @@ build/cli:
 
 test/server:
 	go test -v ./server/tests/.../
+
+dev/server:
+	go run -tags dev server/main.go
+
+dev/web:
+	cd server/web && pnpm dev

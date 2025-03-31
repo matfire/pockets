@@ -7,6 +7,7 @@ import (
 	"github.com/charmbracelet/log"
 	"github.com/matfire/pockets/server/docker"
 	"github.com/matfire/pockets/server/rpc"
+	"github.com/matfire/pockets/server/web"
 	"github.com/matfire/pockets/shared/v1/sharedv1connect"
 	"github.com/spf13/viper"
 	"golang.org/x/net/http2"
@@ -35,9 +36,11 @@ func main() {
 	log.Info("Network Created! Or maybe it already existed")
 	port := viper.GetInt("PORT")
 	pocketServer := rpc.PocketsServer{}
-	path, handler := sharedv1connect.NewPocketsServiceHandler(&pocketServer)
+	apiHanlder := http.NewServeMux()
+	apiHanlder.Handle(sharedv1connect.NewPocketsServiceHandler(&pocketServer))
 	mux := http.NewServeMux()
-	mux.Handle(path, handler)
+	mux.Handle("/api/", http.StripPrefix("/api", apiHanlder))
+	web.HandleWeb(mux)
 	log.Info(fmt.Sprintf("listening on port %d", port))
 	http.ListenAndServe(fmt.Sprintf(":%d", port), h2c.NewHandler(mux, &http2.Server{}))
 }

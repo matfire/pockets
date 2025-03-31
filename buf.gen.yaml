@@ -6,4 +6,10 @@ plugins:
   - local: protoc-gen-connect-go
     out: .
     opt: paths=source_relative
+  - local: protoc-gen-es
+    out: .
+    # Also generate any imported dependencies
+    include_imports: true
+    # Add more plugin options here
+    opt: target=ts
 
