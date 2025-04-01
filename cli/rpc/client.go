@@ -10,6 +10,6 @@ import (
 func GetRPCCLient(config *config.App) sharedv1connect.PocketsServiceClient {
 	return sharedv1connect.NewPocketsServiceClient(
 		http.DefaultClient,
-		config.Endpoint,
+		config.Endpoint+"/api",
 	)
 }
