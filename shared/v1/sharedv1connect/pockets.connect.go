@@ -54,6 +54,9 @@ const (
 	// PocketsServiceDeleteContainerProcedure is the fully-qualified name of the PocketsService's
 	// DeleteContainer RPC.
 	PocketsServiceDeleteContainerProcedure = "/shared.v1.PocketsService/DeleteContainer"
+	// PocketsServiceGetVersionsProcedure is the fully-qualified name of the PocketsService's
+	// GetVersions RPC.
+	PocketsServiceGetVersionsProcedure = "/shared.v1.PocketsService/GetVersions"
 )
 
 // PocketsServiceClient is a client for the shared.v1.PocketsService service.
@@ -65,6 +68,7 @@ type PocketsServiceClient interface {
 	StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error)
 	StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error)
 	DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error)
+	GetVersions(context.Context, *connect.Request[v1.GetVersionsRequest]) (*connect.Response[v1.GetVersionsResponse], error)
 }
 
 // NewPocketsServiceClient constructs a client for the shared.v1.PocketsService service. By default,
@@ -120,6 +124,12 @@ func NewPocketsServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pocketsServiceMethods.ByName("DeleteContainer")),
 			connect.WithClientOptions(opts...),
 		),
+		getVersions: connect.NewClient[v1.GetVersionsRequest, v1.GetVersionsResponse](
+			httpClient,
+			baseURL+PocketsServiceGetVersionsProcedure,
+			connect.WithSchema(pocketsServiceMethods.ByName("GetVersions")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -132,6 +142,7 @@ type pocketsServiceClient struct {
 	startContainer  *connect.Client[v1.StartContainerRequest, v1.StartContainerResponse]
 	stopContainer   *connect.Client[v1.StopContainerRequest, v1.StopContainerResponse]
 	deleteContainer *connect.Client[v1.DeleteContainerRequest, v1.DeleteContainerResponse]
+	getVersions     *connect.Client[v1.GetVersionsRequest, v1.GetVersionsResponse]
 }
 
 // GetContainers calls shared.v1.PocketsService.GetContainers.
@@ -169,6 +180,11 @@ func (c *pocketsServiceClient) DeleteContainer(ctx context.Context, req *connect
 	return c.deleteContainer.CallUnary(ctx, req)
 }
 
+// GetVersions calls shared.v1.PocketsService.GetVersions.
+func (c *pocketsServiceClient) GetVersions(ctx context.Context, req *connect.Request[v1.GetVersionsRequest]) (*connect.Response[v1.GetVersionsResponse], error) {
+	return c.getVersions.CallUnary(ctx, req)
+}
+
 // PocketsServiceHandler is an implementation of the shared.v1.PocketsService service.
 type PocketsServiceHandler interface {
 	GetContainers(context.Context, *connect.Request[v1.GetContainersRequest]) (*connect.Response[v1.GetContainersResponse], error)
@@ -178,6 +194,7 @@ type PocketsServiceHandler interface {
 	StartContainer(context.Context, *connect.Request[v1.StartContainerRequest]) (*connect.Response[v1.StartContainerResponse], error)
 	StopContainer(context.Context, *connect.Request[v1.StopContainerRequest]) (*connect.Response[v1.StopContainerResponse], error)
 	DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error)
+	GetVersions(context.Context, *connect.Request[v1.GetVersionsRequest]) (*connect.Response[v1.GetVersionsResponse], error)
 }
 
 // NewPocketsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -229,6 +246,12 @@ func NewPocketsServiceHandler(svc PocketsServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pocketsServiceMethods.ByName("DeleteContainer")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pocketsServiceGetVersionsHandler := connect.NewUnaryHandler(
+		PocketsServiceGetVersionsProcedure,
+		svc.GetVersions,
+		connect.WithSchema(pocketsServiceMethods.ByName("GetVersions")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/shared.v1.PocketsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PocketsServiceGetContainersProcedure:
@@ -245,6 +268,8 @@ func NewPocketsServiceHandler(svc PocketsServiceHandler, opts ...connect.Handler
 			pocketsServiceStopContainerHandler.ServeHTTP(w, r)
 		case PocketsServiceDeleteContainerProcedure:
 			pocketsServiceDeleteContainerHandler.ServeHTTP(w, r)
+		case PocketsServiceGetVersionsProcedure:
+			pocketsServiceGetVersionsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -280,4 +305,8 @@ func (UnimplementedPocketsServiceHandler) StopContainer(context.Context, *connec
 
 func (UnimplementedPocketsServiceHandler) DeleteContainer(context.Context, *connect.Request[v1.DeleteContainerRequest]) (*connect.Response[v1.DeleteContainerResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.DeleteContainer is not implemented"))
+}
+
+func (UnimplementedPocketsServiceHandler) GetVersions(context.Context, *connect.Request[v1.GetVersionsRequest]) (*connect.Response[v1.GetVersionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shared.v1.PocketsService.GetVersions is not implemented"))
 }

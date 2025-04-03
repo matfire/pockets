@@ -21,6 +21,138 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetVersionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVersionsRequest) Reset() {
+	*x = GetVersionsRequest{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVersionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVersionsRequest) ProtoMessage() {}
+
+func (x *GetVersionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVersionsRequest.ProtoReflect.Descriptor instead.
+func (*GetVersionsRequest) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{0}
+}
+
+type Version struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Tag           string                 `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Version) Reset() {
+	*x = Version{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Version) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Version) ProtoMessage() {}
+
+func (x *Version) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Version.ProtoReflect.Descriptor instead.
+func (*Version) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Version) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Version) GetTag() string {
+	if x != nil {
+		return x.Tag
+	}
+	return ""
+}
+
+type GetVersionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Versions      []*Version             `protobuf:"bytes,1,rep,name=versions,proto3" json:"versions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVersionsResponse) Reset() {
+	*x = GetVersionsResponse{}
+	mi := &file_shared_v1_pockets_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVersionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVersionsResponse) ProtoMessage() {}
+
+func (x *GetVersionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_v1_pockets_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVersionsResponse.ProtoReflect.Descriptor instead.
+func (*GetVersionsResponse) Descriptor() ([]byte, []int) {
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetVersionsResponse) GetVersions() []*Version {
+	if x != nil {
+		return x.Versions
+	}
+	return nil
+}
+
 type GetContainersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -29,7 +161,7 @@ type GetContainersRequest struct {
 
 func (x *GetContainersRequest) Reset() {
 	*x = GetContainersRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[0]
+	mi := &file_shared_v1_pockets_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41,7 +173,7 @@ func (x *GetContainersRequest) String() string {
 func (*GetContainersRequest) ProtoMessage() {}
 
 func (x *GetContainersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[0]
+	mi := &file_shared_v1_pockets_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54,7 +186,7 @@ func (x *GetContainersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetContainersRequest.ProtoReflect.Descriptor instead.
 func (*GetContainersRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{0}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{3}
 }
 
 type GetContainersResponse struct {
@@ -66,7 +198,7 @@ type GetContainersResponse struct {
 
 func (x *GetContainersResponse) Reset() {
 	*x = GetContainersResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[1]
+	mi := &file_shared_v1_pockets_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -78,7 +210,7 @@ func (x *GetContainersResponse) String() string {
 func (*GetContainersResponse) ProtoMessage() {}
 
 func (x *GetContainersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[1]
+	mi := &file_shared_v1_pockets_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -91,7 +223,7 @@ func (x *GetContainersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetContainersResponse.ProtoReflect.Descriptor instead.
 func (*GetContainersResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{1}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetContainersResponse) GetContainers() []*Container {
@@ -106,13 +238,14 @@ type Container struct {
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	State         string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Container) Reset() {
 	*x = Container{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[2]
+	mi := &file_shared_v1_pockets_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -124,7 +257,7 @@ func (x *Container) String() string {
 func (*Container) ProtoMessage() {}
 
 func (x *Container) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[2]
+	mi := &file_shared_v1_pockets_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +270,7 @@ func (x *Container) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Container.ProtoReflect.Descriptor instead.
 func (*Container) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{2}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Container) GetId() string {
@@ -161,6 +294,13 @@ func (x *Container) GetStatus() string {
 	return ""
 }
 
+func (x *Container) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
 type CreateContainerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -171,7 +311,7 @@ type CreateContainerRequest struct {
 
 func (x *CreateContainerRequest) Reset() {
 	*x = CreateContainerRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[3]
+	mi := &file_shared_v1_pockets_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -183,7 +323,7 @@ func (x *CreateContainerRequest) String() string {
 func (*CreateContainerRequest) ProtoMessage() {}
 
 func (x *CreateContainerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[3]
+	mi := &file_shared_v1_pockets_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +336,7 @@ func (x *CreateContainerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateContainerRequest.ProtoReflect.Descriptor instead.
 func (*CreateContainerRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{3}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateContainerRequest) GetName() string {
@@ -222,7 +362,7 @@ type CreateContainerResponse struct {
 
 func (x *CreateContainerResponse) Reset() {
 	*x = CreateContainerResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[4]
+	mi := &file_shared_v1_pockets_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +374,7 @@ func (x *CreateContainerResponse) String() string {
 func (*CreateContainerResponse) ProtoMessage() {}
 
 func (x *CreateContainerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[4]
+	mi := &file_shared_v1_pockets_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +387,7 @@ func (x *CreateContainerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateContainerResponse.ProtoReflect.Descriptor instead.
 func (*CreateContainerResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{4}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateContainerResponse) GetContainer() *Container {
@@ -266,7 +406,7 @@ type CheckImageRequest struct {
 
 func (x *CheckImageRequest) Reset() {
 	*x = CheckImageRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[5]
+	mi := &file_shared_v1_pockets_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +418,7 @@ func (x *CheckImageRequest) String() string {
 func (*CheckImageRequest) ProtoMessage() {}
 
 func (x *CheckImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[5]
+	mi := &file_shared_v1_pockets_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +431,7 @@ func (x *CheckImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckImageRequest.ProtoReflect.Descriptor instead.
 func (*CheckImageRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{5}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CheckImageRequest) GetVersion() string {
@@ -310,7 +450,7 @@ type CheckImageResponse struct {
 
 func (x *CheckImageResponse) Reset() {
 	*x = CheckImageResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[6]
+	mi := &file_shared_v1_pockets_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +462,7 @@ func (x *CheckImageResponse) String() string {
 func (*CheckImageResponse) ProtoMessage() {}
 
 func (x *CheckImageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[6]
+	mi := &file_shared_v1_pockets_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +475,7 @@ func (x *CheckImageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckImageResponse.ProtoReflect.Descriptor instead.
 func (*CheckImageResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{6}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CheckImageResponse) GetExists() bool {
@@ -354,7 +494,7 @@ type CreateImageRequest struct {
 
 func (x *CreateImageRequest) Reset() {
 	*x = CreateImageRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[7]
+	mi := &file_shared_v1_pockets_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -366,7 +506,7 @@ func (x *CreateImageRequest) String() string {
 func (*CreateImageRequest) ProtoMessage() {}
 
 func (x *CreateImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[7]
+	mi := &file_shared_v1_pockets_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -379,7 +519,7 @@ func (x *CreateImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateImageRequest.ProtoReflect.Descriptor instead.
 func (*CreateImageRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{7}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateImageRequest) GetVersion() string {
@@ -397,7 +537,7 @@ type CreateImageResponse struct {
 
 func (x *CreateImageResponse) Reset() {
 	*x = CreateImageResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[8]
+	mi := &file_shared_v1_pockets_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -409,7 +549,7 @@ func (x *CreateImageResponse) String() string {
 func (*CreateImageResponse) ProtoMessage() {}
 
 func (x *CreateImageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[8]
+	mi := &file_shared_v1_pockets_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -422,7 +562,7 @@ func (x *CreateImageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateImageResponse.ProtoReflect.Descriptor instead.
 func (*CreateImageResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{8}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{11}
 }
 
 type StartContainerRequest struct {
@@ -434,7 +574,7 @@ type StartContainerRequest struct {
 
 func (x *StartContainerRequest) Reset() {
 	*x = StartContainerRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[9]
+	mi := &file_shared_v1_pockets_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -446,7 +586,7 @@ func (x *StartContainerRequest) String() string {
 func (*StartContainerRequest) ProtoMessage() {}
 
 func (x *StartContainerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[9]
+	mi := &file_shared_v1_pockets_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -459,7 +599,7 @@ func (x *StartContainerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartContainerRequest.ProtoReflect.Descriptor instead.
 func (*StartContainerRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{9}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StartContainerRequest) GetId() string {
@@ -478,7 +618,7 @@ type StartContainerResponse struct {
 
 func (x *StartContainerResponse) Reset() {
 	*x = StartContainerResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[10]
+	mi := &file_shared_v1_pockets_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -490,7 +630,7 @@ func (x *StartContainerResponse) String() string {
 func (*StartContainerResponse) ProtoMessage() {}
 
 func (x *StartContainerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[10]
+	mi := &file_shared_v1_pockets_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -503,7 +643,7 @@ func (x *StartContainerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartContainerResponse.ProtoReflect.Descriptor instead.
 func (*StartContainerResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{10}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StartContainerResponse) GetStatus() bool {
@@ -522,7 +662,7 @@ type StopContainerRequest struct {
 
 func (x *StopContainerRequest) Reset() {
 	*x = StopContainerRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[11]
+	mi := &file_shared_v1_pockets_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -534,7 +674,7 @@ func (x *StopContainerRequest) String() string {
 func (*StopContainerRequest) ProtoMessage() {}
 
 func (x *StopContainerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[11]
+	mi := &file_shared_v1_pockets_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +687,7 @@ func (x *StopContainerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopContainerRequest.ProtoReflect.Descriptor instead.
 func (*StopContainerRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{11}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StopContainerRequest) GetId() string {
@@ -566,7 +706,7 @@ type StopContainerResponse struct {
 
 func (x *StopContainerResponse) Reset() {
 	*x = StopContainerResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[12]
+	mi := &file_shared_v1_pockets_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -578,7 +718,7 @@ func (x *StopContainerResponse) String() string {
 func (*StopContainerResponse) ProtoMessage() {}
 
 func (x *StopContainerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[12]
+	mi := &file_shared_v1_pockets_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -591,7 +731,7 @@ func (x *StopContainerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopContainerResponse.ProtoReflect.Descriptor instead.
 func (*StopContainerResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{12}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *StopContainerResponse) GetStatus() bool {
@@ -610,7 +750,7 @@ type DeleteContainerRequest struct {
 
 func (x *DeleteContainerRequest) Reset() {
 	*x = DeleteContainerRequest{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[13]
+	mi := &file_shared_v1_pockets_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -622,7 +762,7 @@ func (x *DeleteContainerRequest) String() string {
 func (*DeleteContainerRequest) ProtoMessage() {}
 
 func (x *DeleteContainerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[13]
+	mi := &file_shared_v1_pockets_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,7 +775,7 @@ func (x *DeleteContainerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteContainerRequest.ProtoReflect.Descriptor instead.
 func (*DeleteContainerRequest) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{13}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteContainerRequest) GetId() string {
@@ -654,7 +794,7 @@ type DeleteContainerResponse struct {
 
 func (x *DeleteContainerResponse) Reset() {
 	*x = DeleteContainerResponse{}
-	mi := &file_shared_v1_pockets_proto_msgTypes[14]
+	mi := &file_shared_v1_pockets_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -666,7 +806,7 @@ func (x *DeleteContainerResponse) String() string {
 func (*DeleteContainerResponse) ProtoMessage() {}
 
 func (x *DeleteContainerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_v1_pockets_proto_msgTypes[14]
+	mi := &file_shared_v1_pockets_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -679,7 +819,7 @@ func (x *DeleteContainerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteContainerResponse.ProtoReflect.Descriptor instead.
 func (*DeleteContainerResponse) Descriptor() ([]byte, []int) {
-	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{14}
+	return file_shared_v1_pockets_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteContainerResponse) GetStatus() bool {
@@ -693,16 +833,23 @@ var File_shared_v1_pockets_proto protoreflect.FileDescriptor
 
 const file_shared_v1_pockets_proto_rawDesc = "" +
 	"\n" +
-	"\x17shared/v1/pockets.proto\x12\tshared.v1\"\x16\n" +
+	"\x17shared/v1/pockets.proto\x12\tshared.v1\"\x14\n" +
+	"\x12GetVersionsRequest\"/\n" +
+	"\aVersion\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
+	"\x03tag\x18\x02 \x01(\tR\x03tag\"E\n" +
+	"\x13GetVersionsResponse\x12.\n" +
+	"\bversions\x18\x01 \x03(\v2\x12.shared.v1.VersionR\bversions\"\x16\n" +
 	"\x14GetContainersRequest\"M\n" +
 	"\x15GetContainersResponse\x124\n" +
 	"\n" +
 	"containers\x18\x01 \x03(\v2\x14.shared.v1.ContainerR\n" +
-	"containers\"G\n" +
+	"containers\"]\n" +
 	"\tContainer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\"F\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x14\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"F\n" +
 	"\x16CreateContainerRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\"M\n" +
@@ -726,7 +873,7 @@ const file_shared_v1_pockets_proto_rawDesc = "" +
 	"\x16DeleteContainerRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"1\n" +
 	"\x17DeleteContainerResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\bR\x06status2\xea\x04\n" +
+	"\x06status\x18\x01 \x01(\bR\x06status2\xba\x05\n" +
 	"\x0ePocketsService\x12T\n" +
 	"\rGetContainers\x12\x1f.shared.v1.GetContainersRequest\x1a .shared.v1.GetContainersResponse\"\x00\x12Z\n" +
 	"\x0fCreateContainer\x12!.shared.v1.CreateContainerRequest\x1a\".shared.v1.CreateContainerResponse\"\x00\x12K\n" +
@@ -735,7 +882,8 @@ const file_shared_v1_pockets_proto_rawDesc = "" +
 	"\vCreateImage\x12\x1d.shared.v1.CreateImageRequest\x1a\x1e.shared.v1.CreateImageResponse\"\x00\x12W\n" +
 	"\x0eStartContainer\x12 .shared.v1.StartContainerRequest\x1a!.shared.v1.StartContainerResponse\"\x00\x12T\n" +
 	"\rStopContainer\x12\x1f.shared.v1.StopContainerRequest\x1a .shared.v1.StopContainerResponse\"\x00\x12Z\n" +
-	"\x0fDeleteContainer\x12!.shared.v1.DeleteContainerRequest\x1a\".shared.v1.DeleteContainerResponse\"\x00B/Z-github.com/matfire/pockets/shared/v1;sharedv1b\x06proto3"
+	"\x0fDeleteContainer\x12!.shared.v1.DeleteContainerRequest\x1a\".shared.v1.DeleteContainerResponse\"\x00\x12N\n" +
+	"\vGetVersions\x12\x1d.shared.v1.GetVersionsRequest\x1a\x1e.shared.v1.GetVersionsResponse\"\x00B/Z-github.com/matfire/pockets/shared/v1;sharedv1b\x06proto3"
 
 var (
 	file_shared_v1_pockets_proto_rawDescOnce sync.Once
@@ -749,46 +897,52 @@ func file_shared_v1_pockets_proto_rawDescGZIP() []byte {
 	return file_shared_v1_pockets_proto_rawDescData
 }
 
-var file_shared_v1_pockets_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_shared_v1_pockets_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_shared_v1_pockets_proto_goTypes = []any{
-	(*GetContainersRequest)(nil),    // 0: shared.v1.GetContainersRequest
-	(*GetContainersResponse)(nil),   // 1: shared.v1.GetContainersResponse
-	(*Container)(nil),               // 2: shared.v1.Container
-	(*CreateContainerRequest)(nil),  // 3: shared.v1.CreateContainerRequest
-	(*CreateContainerResponse)(nil), // 4: shared.v1.CreateContainerResponse
-	(*CheckImageRequest)(nil),       // 5: shared.v1.CheckImageRequest
-	(*CheckImageResponse)(nil),      // 6: shared.v1.CheckImageResponse
-	(*CreateImageRequest)(nil),      // 7: shared.v1.CreateImageRequest
-	(*CreateImageResponse)(nil),     // 8: shared.v1.CreateImageResponse
-	(*StartContainerRequest)(nil),   // 9: shared.v1.StartContainerRequest
-	(*StartContainerResponse)(nil),  // 10: shared.v1.StartContainerResponse
-	(*StopContainerRequest)(nil),    // 11: shared.v1.StopContainerRequest
-	(*StopContainerResponse)(nil),   // 12: shared.v1.StopContainerResponse
-	(*DeleteContainerRequest)(nil),  // 13: shared.v1.DeleteContainerRequest
-	(*DeleteContainerResponse)(nil), // 14: shared.v1.DeleteContainerResponse
+	(*GetVersionsRequest)(nil),      // 0: shared.v1.GetVersionsRequest
+	(*Version)(nil),                 // 1: shared.v1.Version
+	(*GetVersionsResponse)(nil),     // 2: shared.v1.GetVersionsResponse
+	(*GetContainersRequest)(nil),    // 3: shared.v1.GetContainersRequest
+	(*GetContainersResponse)(nil),   // 4: shared.v1.GetContainersResponse
+	(*Container)(nil),               // 5: shared.v1.Container
+	(*CreateContainerRequest)(nil),  // 6: shared.v1.CreateContainerRequest
+	(*CreateContainerResponse)(nil), // 7: shared.v1.CreateContainerResponse
+	(*CheckImageRequest)(nil),       // 8: shared.v1.CheckImageRequest
+	(*CheckImageResponse)(nil),      // 9: shared.v1.CheckImageResponse
+	(*CreateImageRequest)(nil),      // 10: shared.v1.CreateImageRequest
+	(*CreateImageResponse)(nil),     // 11: shared.v1.CreateImageResponse
+	(*StartContainerRequest)(nil),   // 12: shared.v1.StartContainerRequest
+	(*StartContainerResponse)(nil),  // 13: shared.v1.StartContainerResponse
+	(*StopContainerRequest)(nil),    // 14: shared.v1.StopContainerRequest
+	(*StopContainerResponse)(nil),   // 15: shared.v1.StopContainerResponse
+	(*DeleteContainerRequest)(nil),  // 16: shared.v1.DeleteContainerRequest
+	(*DeleteContainerResponse)(nil), // 17: shared.v1.DeleteContainerResponse
 }
 var file_shared_v1_pockets_proto_depIdxs = []int32{
-	2,  // 0: shared.v1.GetContainersResponse.containers:type_name -> shared.v1.Container
-	2,  // 1: shared.v1.CreateContainerResponse.container:type_name -> shared.v1.Container
-	0,  // 2: shared.v1.PocketsService.GetContainers:input_type -> shared.v1.GetContainersRequest
-	3,  // 3: shared.v1.PocketsService.CreateContainer:input_type -> shared.v1.CreateContainerRequest
-	5,  // 4: shared.v1.PocketsService.CheckImage:input_type -> shared.v1.CheckImageRequest
-	7,  // 5: shared.v1.PocketsService.CreateImage:input_type -> shared.v1.CreateImageRequest
-	9,  // 6: shared.v1.PocketsService.StartContainer:input_type -> shared.v1.StartContainerRequest
-	11, // 7: shared.v1.PocketsService.StopContainer:input_type -> shared.v1.StopContainerRequest
-	13, // 8: shared.v1.PocketsService.DeleteContainer:input_type -> shared.v1.DeleteContainerRequest
-	1,  // 9: shared.v1.PocketsService.GetContainers:output_type -> shared.v1.GetContainersResponse
-	4,  // 10: shared.v1.PocketsService.CreateContainer:output_type -> shared.v1.CreateContainerResponse
-	6,  // 11: shared.v1.PocketsService.CheckImage:output_type -> shared.v1.CheckImageResponse
-	8,  // 12: shared.v1.PocketsService.CreateImage:output_type -> shared.v1.CreateImageResponse
-	10, // 13: shared.v1.PocketsService.StartContainer:output_type -> shared.v1.StartContainerResponse
-	12, // 14: shared.v1.PocketsService.StopContainer:output_type -> shared.v1.StopContainerResponse
-	14, // 15: shared.v1.PocketsService.DeleteContainer:output_type -> shared.v1.DeleteContainerResponse
-	9,  // [9:16] is the sub-list for method output_type
-	2,  // [2:9] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	1,  // 0: shared.v1.GetVersionsResponse.versions:type_name -> shared.v1.Version
+	5,  // 1: shared.v1.GetContainersResponse.containers:type_name -> shared.v1.Container
+	5,  // 2: shared.v1.CreateContainerResponse.container:type_name -> shared.v1.Container
+	3,  // 3: shared.v1.PocketsService.GetContainers:input_type -> shared.v1.GetContainersRequest
+	6,  // 4: shared.v1.PocketsService.CreateContainer:input_type -> shared.v1.CreateContainerRequest
+	8,  // 5: shared.v1.PocketsService.CheckImage:input_type -> shared.v1.CheckImageRequest
+	10, // 6: shared.v1.PocketsService.CreateImage:input_type -> shared.v1.CreateImageRequest
+	12, // 7: shared.v1.PocketsService.StartContainer:input_type -> shared.v1.StartContainerRequest
+	14, // 8: shared.v1.PocketsService.StopContainer:input_type -> shared.v1.StopContainerRequest
+	16, // 9: shared.v1.PocketsService.DeleteContainer:input_type -> shared.v1.DeleteContainerRequest
+	0,  // 10: shared.v1.PocketsService.GetVersions:input_type -> shared.v1.GetVersionsRequest
+	4,  // 11: shared.v1.PocketsService.GetContainers:output_type -> shared.v1.GetContainersResponse
+	7,  // 12: shared.v1.PocketsService.CreateContainer:output_type -> shared.v1.CreateContainerResponse
+	9,  // 13: shared.v1.PocketsService.CheckImage:output_type -> shared.v1.CheckImageResponse
+	11, // 14: shared.v1.PocketsService.CreateImage:output_type -> shared.v1.CreateImageResponse
+	13, // 15: shared.v1.PocketsService.StartContainer:output_type -> shared.v1.StartContainerResponse
+	15, // 16: shared.v1.PocketsService.StopContainer:output_type -> shared.v1.StopContainerResponse
+	17, // 17: shared.v1.PocketsService.DeleteContainer:output_type -> shared.v1.DeleteContainerResponse
+	2,  // 18: shared.v1.PocketsService.GetVersions:output_type -> shared.v1.GetVersionsResponse
+	11, // [11:19] is the sub-list for method output_type
+	3,  // [3:11] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_shared_v1_pockets_proto_init() }
@@ -802,7 +956,7 @@ func file_shared_v1_pockets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_v1_pockets_proto_rawDesc), len(file_shared_v1_pockets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

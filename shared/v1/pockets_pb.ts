@@ -10,7 +10,59 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file shared/v1/pockets.proto.
  */
 export const file_shared_v1_pockets: GenFile = /*@__PURE__*/
-  fileDesc("ChdzaGFyZWQvdjEvcG9ja2V0cy5wcm90bxIJc2hhcmVkLnYxIhYKFEdldENvbnRhaW5lcnNSZXF1ZXN0IkEKFUdldENvbnRhaW5lcnNSZXNwb25zZRIoCgpjb250YWluZXJzGAEgAygLMhQuc2hhcmVkLnYxLkNvbnRhaW5lciI1CglDb250YWluZXISCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRIOCgZzdGF0dXMYAyABKAkiNwoWQ3JlYXRlQ29udGFpbmVyUmVxdWVzdBIMCgRuYW1lGAEgASgJEg8KB3ZlcnNpb24YAiABKAkiQgoXQ3JlYXRlQ29udGFpbmVyUmVzcG9uc2USJwoJY29udGFpbmVyGAEgASgLMhQuc2hhcmVkLnYxLkNvbnRhaW5lciIkChFDaGVja0ltYWdlUmVxdWVzdBIPCgd2ZXJzaW9uGAEgASgJIiQKEkNoZWNrSW1hZ2VSZXNwb25zZRIOCgZleGlzdHMYASABKAgiJQoSQ3JlYXRlSW1hZ2VSZXF1ZXN0Eg8KB3ZlcnNpb24YASABKAkiFQoTQ3JlYXRlSW1hZ2VSZXNwb25zZSIjChVTdGFydENvbnRhaW5lclJlcXVlc3QSCgoCaWQYASABKAkiKAoWU3RhcnRDb250YWluZXJSZXNwb25zZRIOCgZzdGF0dXMYASABKAgiIgoUU3RvcENvbnRhaW5lclJlcXVlc3QSCgoCaWQYASABKAkiJwoVU3RvcENvbnRhaW5lclJlc3BvbnNlEg4KBnN0YXR1cxgBIAEoCCIkChZEZWxldGVDb250YWluZXJSZXF1ZXN0EgoKAmlkGAEgASgJIikKF0RlbGV0ZUNvbnRhaW5lclJlc3BvbnNlEg4KBnN0YXR1cxgBIAEoCDLqBAoOUG9ja2V0c1NlcnZpY2USVAoNR2V0Q29udGFpbmVycxIfLnNoYXJlZC52MS5HZXRDb250YWluZXJzUmVxdWVzdBogLnNoYXJlZC52MS5HZXRDb250YWluZXJzUmVzcG9uc2UiABJaCg9DcmVhdGVDb250YWluZXISIS5zaGFyZWQudjEuQ3JlYXRlQ29udGFpbmVyUmVxdWVzdBoiLnNoYXJlZC52MS5DcmVhdGVDb250YWluZXJSZXNwb25zZSIAEksKCkNoZWNrSW1hZ2USHC5zaGFyZWQudjEuQ2hlY2tJbWFnZVJlcXVlc3QaHS5zaGFyZWQudjEuQ2hlY2tJbWFnZVJlc3BvbnNlIgASTgoLQ3JlYXRlSW1hZ2USHS5zaGFyZWQudjEuQ3JlYXRlSW1hZ2VSZXF1ZXN0Gh4uc2hhcmVkLnYxLkNyZWF0ZUltYWdlUmVzcG9uc2UiABJXCg5TdGFydENvbnRhaW5lchIgLnNoYXJlZC52MS5TdGFydENvbnRhaW5lclJlcXVlc3QaIS5zaGFyZWQudjEuU3RhcnRDb250YWluZXJSZXNwb25zZSIAElQKDVN0b3BDb250YWluZXISHy5zaGFyZWQudjEuU3RvcENvbnRhaW5lclJlcXVlc3QaIC5zaGFyZWQudjEuU3RvcENvbnRhaW5lclJlc3BvbnNlIgASWgoPRGVsZXRlQ29udGFpbmVyEiEuc2hhcmVkLnYxLkRlbGV0ZUNvbnRhaW5lclJlcXVlc3QaIi5zaGFyZWQudjEuRGVsZXRlQ29udGFpbmVyUmVzcG9uc2UiAEIvWi1naXRodWIuY29tL21hdGZpcmUvcG9ja2V0cy9zaGFyZWQvdjE7c2hhcmVkdjFiBnByb3RvMw");
+  fileDesc("ChdzaGFyZWQvdjEvcG9ja2V0cy5wcm90bxIJc2hhcmVkLnYxIhQKEkdldFZlcnNpb25zUmVxdWVzdCIkCgdWZXJzaW9uEgwKBG5hbWUYASABKAkSCwoDdGFnGAIgASgJIjsKE0dldFZlcnNpb25zUmVzcG9uc2USJAoIdmVyc2lvbnMYASADKAsyEi5zaGFyZWQudjEuVmVyc2lvbiIWChRHZXRDb250YWluZXJzUmVxdWVzdCJBChVHZXRDb250YWluZXJzUmVzcG9uc2USKAoKY29udGFpbmVycxgBIAMoCzIULnNoYXJlZC52MS5Db250YWluZXIiRAoJQ29udGFpbmVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSDgoGc3RhdHVzGAMgASgJEg0KBXN0YXRlGAQgASgJIjcKFkNyZWF0ZUNvbnRhaW5lclJlcXVlc3QSDAoEbmFtZRgBIAEoCRIPCgd2ZXJzaW9uGAIgASgJIkIKF0NyZWF0ZUNvbnRhaW5lclJlc3BvbnNlEicKCWNvbnRhaW5lchgBIAEoCzIULnNoYXJlZC52MS5Db250YWluZXIiJAoRQ2hlY2tJbWFnZVJlcXVlc3QSDwoHdmVyc2lvbhgBIAEoCSIkChJDaGVja0ltYWdlUmVzcG9uc2USDgoGZXhpc3RzGAEgASgIIiUKEkNyZWF0ZUltYWdlUmVxdWVzdBIPCgd2ZXJzaW9uGAEgASgJIhUKE0NyZWF0ZUltYWdlUmVzcG9uc2UiIwoVU3RhcnRDb250YWluZXJSZXF1ZXN0EgoKAmlkGAEgASgJIigKFlN0YXJ0Q29udGFpbmVyUmVzcG9uc2USDgoGc3RhdHVzGAEgASgIIiIKFFN0b3BDb250YWluZXJSZXF1ZXN0EgoKAmlkGAEgASgJIicKFVN0b3BDb250YWluZXJSZXNwb25zZRIOCgZzdGF0dXMYASABKAgiJAoWRGVsZXRlQ29udGFpbmVyUmVxdWVzdBIKCgJpZBgBIAEoCSIpChdEZWxldGVDb250YWluZXJSZXNwb25zZRIOCgZzdGF0dXMYASABKAgyugUKDlBvY2tldHNTZXJ2aWNlElQKDUdldENvbnRhaW5lcnMSHy5zaGFyZWQudjEuR2V0Q29udGFpbmVyc1JlcXVlc3QaIC5zaGFyZWQudjEuR2V0Q29udGFpbmVyc1Jlc3BvbnNlIgASWgoPQ3JlYXRlQ29udGFpbmVyEiEuc2hhcmVkLnYxLkNyZWF0ZUNvbnRhaW5lclJlcXVlc3QaIi5zaGFyZWQudjEuQ3JlYXRlQ29udGFpbmVyUmVzcG9uc2UiABJLCgpDaGVja0ltYWdlEhwuc2hhcmVkLnYxLkNoZWNrSW1hZ2VSZXF1ZXN0Gh0uc2hhcmVkLnYxLkNoZWNrSW1hZ2VSZXNwb25zZSIAEk4KC0NyZWF0ZUltYWdlEh0uc2hhcmVkLnYxLkNyZWF0ZUltYWdlUmVxdWVzdBoeLnNoYXJlZC52MS5DcmVhdGVJbWFnZVJlc3BvbnNlIgASVwoOU3RhcnRDb250YWluZXISIC5zaGFyZWQudjEuU3RhcnRDb250YWluZXJSZXF1ZXN0GiEuc2hhcmVkLnYxLlN0YXJ0Q29udGFpbmVyUmVzcG9uc2UiABJUCg1TdG9wQ29udGFpbmVyEh8uc2hhcmVkLnYxLlN0b3BDb250YWluZXJSZXF1ZXN0GiAuc2hhcmVkLnYxLlN0b3BDb250YWluZXJSZXNwb25zZSIAEloKD0RlbGV0ZUNvbnRhaW5lchIhLnNoYXJlZC52MS5EZWxldGVDb250YWluZXJSZXF1ZXN0GiIuc2hhcmVkLnYxLkRlbGV0ZUNvbnRhaW5lclJlc3BvbnNlIgASTgoLR2V0VmVyc2lvbnMSHS5zaGFyZWQudjEuR2V0VmVyc2lvbnNSZXF1ZXN0Gh4uc2hhcmVkLnYxLkdldFZlcnNpb25zUmVzcG9uc2UiAEIvWi1naXRodWIuY29tL21hdGZpcmUvcG9ja2V0cy9zaGFyZWQvdjE7c2hhcmVkdjFiBnByb3RvMw");
+
+/**
+ * @generated from message shared.v1.GetVersionsRequest
+ */
+export type GetVersionsRequest = Message<"shared.v1.GetVersionsRequest"> & {
+};
+
+/**
+ * Describes the message shared.v1.GetVersionsRequest.
+ * Use `create(GetVersionsRequestSchema)` to create a new message.
+ */
+export const GetVersionsRequestSchema: GenMessage<GetVersionsRequest> = /*@__PURE__*/
+  messageDesc(file_shared_v1_pockets, 0);
+
+/**
+ * @generated from message shared.v1.Version
+ */
+export type Version = Message<"shared.v1.Version"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string tag = 2;
+   */
+  tag: string;
+};
+
+/**
+ * Describes the message shared.v1.Version.
+ * Use `create(VersionSchema)` to create a new message.
+ */
+export const VersionSchema: GenMessage<Version> = /*@__PURE__*/
+  messageDesc(file_shared_v1_pockets, 1);
+
+/**
+ * @generated from message shared.v1.GetVersionsResponse
+ */
+export type GetVersionsResponse = Message<"shared.v1.GetVersionsResponse"> & {
+  /**
+   * @generated from field: repeated shared.v1.Version versions = 1;
+   */
+  versions: Version[];
+};
+
+/**
+ * Describes the message shared.v1.GetVersionsResponse.
+ * Use `create(GetVersionsResponseSchema)` to create a new message.
+ */
+export const GetVersionsResponseSchema: GenMessage<GetVersionsResponse> = /*@__PURE__*/
+  messageDesc(file_shared_v1_pockets, 2);
 
 /**
  * @generated from message shared.v1.GetContainersRequest
@@ -23,7 +75,7 @@ export type GetContainersRequest = Message<"shared.v1.GetContainersRequest"> & {
  * Use `create(GetContainersRequestSchema)` to create a new message.
  */
 export const GetContainersRequestSchema: GenMessage<GetContainersRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 0);
+  messageDesc(file_shared_v1_pockets, 3);
 
 /**
  * @generated from message shared.v1.GetContainersResponse
@@ -40,7 +92,7 @@ export type GetContainersResponse = Message<"shared.v1.GetContainersResponse"> &
  * Use `create(GetContainersResponseSchema)` to create a new message.
  */
 export const GetContainersResponseSchema: GenMessage<GetContainersResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 1);
+  messageDesc(file_shared_v1_pockets, 4);
 
 /**
  * @generated from message shared.v1.Container
@@ -60,6 +112,11 @@ export type Container = Message<"shared.v1.Container"> & {
    * @generated from field: string status = 3;
    */
   status: string;
+
+  /**
+   * @generated from field: string state = 4;
+   */
+  state: string;
 };
 
 /**
@@ -67,7 +124,7 @@ export type Container = Message<"shared.v1.Container"> & {
  * Use `create(ContainerSchema)` to create a new message.
  */
 export const ContainerSchema: GenMessage<Container> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 2);
+  messageDesc(file_shared_v1_pockets, 5);
 
 /**
  * @generated from message shared.v1.CreateContainerRequest
@@ -89,7 +146,7 @@ export type CreateContainerRequest = Message<"shared.v1.CreateContainerRequest">
  * Use `create(CreateContainerRequestSchema)` to create a new message.
  */
 export const CreateContainerRequestSchema: GenMessage<CreateContainerRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 3);
+  messageDesc(file_shared_v1_pockets, 6);
 
 /**
  * @generated from message shared.v1.CreateContainerResponse
@@ -106,7 +163,7 @@ export type CreateContainerResponse = Message<"shared.v1.CreateContainerResponse
  * Use `create(CreateContainerResponseSchema)` to create a new message.
  */
 export const CreateContainerResponseSchema: GenMessage<CreateContainerResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 4);
+  messageDesc(file_shared_v1_pockets, 7);
 
 /**
  * @generated from message shared.v1.CheckImageRequest
@@ -123,7 +180,7 @@ export type CheckImageRequest = Message<"shared.v1.CheckImageRequest"> & {
  * Use `create(CheckImageRequestSchema)` to create a new message.
  */
 export const CheckImageRequestSchema: GenMessage<CheckImageRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 5);
+  messageDesc(file_shared_v1_pockets, 8);
 
 /**
  * @generated from message shared.v1.CheckImageResponse
@@ -140,7 +197,7 @@ export type CheckImageResponse = Message<"shared.v1.CheckImageResponse"> & {
  * Use `create(CheckImageResponseSchema)` to create a new message.
  */
 export const CheckImageResponseSchema: GenMessage<CheckImageResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 6);
+  messageDesc(file_shared_v1_pockets, 9);
 
 /**
  * @generated from message shared.v1.CreateImageRequest
@@ -157,7 +214,7 @@ export type CreateImageRequest = Message<"shared.v1.CreateImageRequest"> & {
  * Use `create(CreateImageRequestSchema)` to create a new message.
  */
 export const CreateImageRequestSchema: GenMessage<CreateImageRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 7);
+  messageDesc(file_shared_v1_pockets, 10);
 
 /**
  * @generated from message shared.v1.CreateImageResponse
@@ -170,7 +227,7 @@ export type CreateImageResponse = Message<"shared.v1.CreateImageResponse"> & {
  * Use `create(CreateImageResponseSchema)` to create a new message.
  */
 export const CreateImageResponseSchema: GenMessage<CreateImageResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 8);
+  messageDesc(file_shared_v1_pockets, 11);
 
 /**
  * @generated from message shared.v1.StartContainerRequest
@@ -187,7 +244,7 @@ export type StartContainerRequest = Message<"shared.v1.StartContainerRequest"> &
  * Use `create(StartContainerRequestSchema)` to create a new message.
  */
 export const StartContainerRequestSchema: GenMessage<StartContainerRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 9);
+  messageDesc(file_shared_v1_pockets, 12);
 
 /**
  * @generated from message shared.v1.StartContainerResponse
@@ -204,7 +261,7 @@ export type StartContainerResponse = Message<"shared.v1.StartContainerResponse">
  * Use `create(StartContainerResponseSchema)` to create a new message.
  */
 export const StartContainerResponseSchema: GenMessage<StartContainerResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 10);
+  messageDesc(file_shared_v1_pockets, 13);
 
 /**
  * @generated from message shared.v1.StopContainerRequest
@@ -221,7 +278,7 @@ export type StopContainerRequest = Message<"shared.v1.StopContainerRequest"> & {
  * Use `create(StopContainerRequestSchema)` to create a new message.
  */
 export const StopContainerRequestSchema: GenMessage<StopContainerRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 11);
+  messageDesc(file_shared_v1_pockets, 14);
 
 /**
  * @generated from message shared.v1.StopContainerResponse
@@ -238,7 +295,7 @@ export type StopContainerResponse = Message<"shared.v1.StopContainerResponse"> &
  * Use `create(StopContainerResponseSchema)` to create a new message.
  */
 export const StopContainerResponseSchema: GenMessage<StopContainerResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 12);
+  messageDesc(file_shared_v1_pockets, 15);
 
 /**
  * @generated from message shared.v1.DeleteContainerRequest
@@ -255,7 +312,7 @@ export type DeleteContainerRequest = Message<"shared.v1.DeleteContainerRequest">
  * Use `create(DeleteContainerRequestSchema)` to create a new message.
  */
 export const DeleteContainerRequestSchema: GenMessage<DeleteContainerRequest> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 13);
+  messageDesc(file_shared_v1_pockets, 16);
 
 /**
  * @generated from message shared.v1.DeleteContainerResponse
@@ -272,7 +329,7 @@ export type DeleteContainerResponse = Message<"shared.v1.DeleteContainerResponse
  * Use `create(DeleteContainerResponseSchema)` to create a new message.
  */
 export const DeleteContainerResponseSchema: GenMessage<DeleteContainerResponse> = /*@__PURE__*/
-  messageDesc(file_shared_v1_pockets, 14);
+  messageDesc(file_shared_v1_pockets, 17);
 
 /**
  * @generated from service shared.v1.PocketsService
@@ -333,6 +390,14 @@ export const PocketsService: GenService<{
     methodKind: "unary";
     input: typeof DeleteContainerRequestSchema;
     output: typeof DeleteContainerResponseSchema;
+  },
+  /**
+   * @generated from rpc shared.v1.PocketsService.GetVersions
+   */
+  getVersions: {
+    methodKind: "unary";
+    input: typeof GetVersionsRequestSchema;
+    output: typeof GetVersionsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_shared_v1_pockets, 0);

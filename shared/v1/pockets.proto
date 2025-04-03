@@ -12,6 +12,18 @@ service PocketsService {
 	rpc StartContainer(StartContainerRequest) returns (StartContainerResponse) {}
 	rpc StopContainer(StopContainerRequest) returns (StopContainerResponse) {}
 	rpc DeleteContainer(DeleteContainerRequest) returns (DeleteContainerResponse) {}
+	rpc GetVersions(GetVersionsRequest) returns (GetVersionsResponse) {}
+}
+
+message GetVersionsRequest {}
+
+message Version {
+	string name = 1;
+	string tag = 2;
+}
+
+message GetVersionsResponse {
+	repeated Version versions = 1;
 }
 
 message GetContainersRequest {}
@@ -24,6 +36,7 @@ message Container {
 	string id = 1;
 	string name = 2;
 	string status = 3;
+	string state = 4;
 }
 
 message CreateContainerRequest {

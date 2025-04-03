@@ -54,3 +54,9 @@ func (s *PocketsServer) DeleteContainer(ctx context.Context, req *connect.Reques
 	res := connect.NewResponse(data)
 	return res, err
 }
+
+func (s *PocketsServer) GetVersions(ctx context.Context, req *connect.Request[sharedv1.GetVersionsRequest]) (*connect.Response[sharedv1.GetVersionsResponse], error) {
+	data, err := utils.GetVersions()
+	res := connect.NewResponse(data)
+	return res, err
+}
